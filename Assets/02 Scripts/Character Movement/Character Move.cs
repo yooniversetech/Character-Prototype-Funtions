@@ -1,0 +1,57 @@
+using UnityEngine;
+
+public class CharacterMove: MonoBehaviour
+{
+    private CharacterController controller;
+    private Vector3 velocity;
+
+    [SerializeField] private float moveSpeed = 1f; // 움직이는 속도
+
+    [SerializeField] private float rotationSpeed = 150f; // 캐릭터 회전 속도
+
+    [SerializeField] private float gravity = -9.81f; // 중력 값 (지구 중력 기준)
+    [SerializeField] private float jumpHeight = 2f; // 점프 높이 값
+
+    private void Start()
+    {
+        controller = GetComponent<CharacterController>();
+    }
+    private void Update()
+    {
+        Move();
+        Rotation();
+        Jump();
+    }
+
+    /// <summary>
+    /// 캐릭터의 Position을 W,A,S,D 키로 조작하는 기능
+    /// </summary>
+    public void Move()
+    {
+        var X = Input.GetAxis("Horizontal");
+        var Z = Input.GetAxis("Vertical");
+
+        Vector3 moveDir = transform.right * X + transform.forward * Z;
+        transform.position += moveDir * moveSpeed * Time.deltaTime;
+    }
+
+    public void Jump()
+    {
+        if(controller.isGrounded && velocity.y < 0)
+            velocity.y = -2;
+        if (controller.isGrounded && Input.GetButtonDown("Jump"))
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
+    }
+
+    /// <summary>
+    /// 마우스 이동시 캐릭터 회전(Y축 기준 회전) 기능
+    /// </summary>
+    public void Rotation()
+    {
+        float mouseX = Input.GetAxis("Mouse X");
+        transform.Rotate(Vector3.up, mouseX * rotationSpeed * Time.deltaTime);
+    }
+}

@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// 점프, WASD기반 움직임, 마우스 
+/// </summary>
 public class CharacterMove: MonoBehaviour
 {
     private CharacterController controller;
@@ -17,7 +20,7 @@ public class CharacterMove: MonoBehaviour
         controller = GetComponent<CharacterController>();
     }
     private void Update()
-    {
+    { 
         Move();
         Rotation();
         Jump();
@@ -32,9 +35,12 @@ public class CharacterMove: MonoBehaviour
         var Z = Input.GetAxis("Vertical");
 
         Vector3 moveDir = transform.right * X + transform.forward * Z;
-        transform.position += moveDir * moveSpeed * Time.deltaTime;
+        controller.Move(moveDir * moveSpeed * Time.deltaTime);
     }
 
+    /// <summary>
+    /// 'Space Bar' 를 이용한 점프 기능
+    /// </summary>
     public void Jump()
     {
         if(controller.isGrounded && velocity.y < 0)
@@ -54,4 +60,6 @@ public class CharacterMove: MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X");
         transform.Rotate(Vector3.up, mouseX * rotationSpeed * Time.deltaTime);
     }
+
+
 }

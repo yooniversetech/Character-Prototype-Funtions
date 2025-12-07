@@ -3,11 +3,11 @@ using UnityEngine;
 public class CameraPivotController : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private Transform playerBody;            // 캐릭터의 목이나 머리위치
+    [SerializeField] private Transform playerBody; // 캐릭터의 목이나 머리위치
 
     [Header("Settings")]
-    private float mouseSensitivity = 150f;  // 마우스 감도
-    private float xRotation = 0f;           // 현제 위아래 각도
+    private float mouseSensitivity = 150f;         // 마우스 감도
+    private float xRotation = 0f;                  // 현제 위아래 각도
 
     private void Start()
     {

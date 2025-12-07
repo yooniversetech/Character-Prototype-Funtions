@@ -1031,8 +1031,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c348bd5e0e683514885d9d7910571e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 330585546}
   moveSpeed: 5
-  rotationSpeed: 150
+  turnSmoothTime: 0.1
   gravity: -9.81
   jumpHeight: 2
   groundedBufferTime: 0.15

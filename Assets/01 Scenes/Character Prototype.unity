@@ -777,6 +777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 234cf8b62f0a29249b30260a6cc0c8a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryUI: {fileID: 0}
 --- !u!1 &1399237202
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,7 +826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e2e0c6e327c3a749bb1b853b582b69d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryUI: {fileID: 1713868423}
+  cells: []
 --- !u!1 &1400536982
 GameObject:
   m_ObjectHideFlags: 0

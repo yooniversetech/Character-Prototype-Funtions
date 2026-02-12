@@ -2,7 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class InventoryController : MonoBehaviour
+public class InventoryController : BaseUI
 {
     [SerializeField] private ItemCell[] cells;
 

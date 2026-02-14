@@ -16,7 +16,7 @@ public class UIDataMovementDecision : MonoBehaviour
 
         if (targetCell.CanAccept(draggableObject))
         {
-            if (!targetCell.IsEmpty && TryMerge(draggableObject, targetCell))
+            if (!targetCell.IsEmpty)
             {
                 return;
             }
@@ -42,6 +42,6 @@ public class UIDataMovementDecision : MonoBehaviour
             target.ClearCell();
             sourceCell.SetItem(existingTargetItem);
         }
-        target.SetItem(dragged); 
+        target.SetItem(dragged);
     }
 }

@@ -7,7 +7,7 @@ public class UIInputManager : MonoBehaviour
 
     // BaseUI 상속 받는 UI 클래스들 참조
     [SerializeField] private BaseUI inventory;
-    [SerializeField] private BaseUI map;
+    //[SerializeField] private BaseUI map;
 
     private void Update()
     {

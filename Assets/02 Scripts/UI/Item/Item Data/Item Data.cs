@@ -11,7 +11,7 @@ public class ItemData : ScriptableObject
     public int maxStack;
 
     [TextArea]
-    public int id;
+    public int ID;
     public string itemName;
     public string description;
 }

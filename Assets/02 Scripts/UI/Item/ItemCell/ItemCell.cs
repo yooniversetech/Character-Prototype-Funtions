@@ -1,8 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class ItemCell : MonoBehaviour, ICell
 {
+    [SerializeField] private Image itemIcon;
     public IDraggable ContainedItem { get; private set; }
     public bool IsEmpty => ContainedItem == null;
 
@@ -16,10 +19,19 @@ public class ItemCell : MonoBehaviour, ICell
     public void SetItem(IDraggable draggable)
     {
         ContainedItem = draggable;
-        draggable.CurrentCell = this; 
 
-        ((MonoBehaviour)draggable).transform.SetParent(transform);
-        ((MonoBehaviour)draggable).transform.localPosition = Vector3.zero;
+        if (draggable != null)
+        {
+            if (itemIcon != null)
+            {
+                itemIcon.sprite = draggable.Data.Icon;
+                itemIcon.gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            if (itemIcon != null) itemIcon.gameObject.SetActive(false);
+        }
     }
 
     public void ClearCell()

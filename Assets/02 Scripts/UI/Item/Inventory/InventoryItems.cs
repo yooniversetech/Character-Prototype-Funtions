@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class InventoryItem : IDraggable
 {
-    private ItemData data;
-
-    public int ItemID => data.ID; 
-
-    public int MaxStack => data.MaxStack;
-
+    // 아이템 데이터에서 사용될 필드
+    public ItemData Data { get; private set; }
+    public int ItemID => Data.ID; 
+    public int MaxStack => Data.MaxStack;
     public bool IsFull => CurrentStack >= MaxStack;
 
+    // 인벤토리 내부에서 사용될 실질적인 데이터
     public int CurrentStack {  get; private set; }
     public ICell CurrentCell { get; private set; }
 
@@ -19,7 +18,7 @@ public class InventoryItem : IDraggable
 
     public InventoryItem(ItemData itemData, int amount = 1)
     {
-        this.data = itemData;
+        this.Data = itemData;
         this.CurrentStack = amount;
     }
 

@@ -4,17 +4,17 @@ using UnityEngine;
 public class ItemData : ScriptableObject
 {
     // 모든 아이템에 필요한 데이터 필드
-    public Sprite Icon;
+    [TextArea]
+    [SerializeField] private Sprite icon;
+    [SerializeField] public int id;
+    [SerializeField] public string ItemName;
+    [SerializeField] public string description;
 
     public bool isStackable;
     public int defalutStack = 1;
     public int maxStack;
 
-    [TextArea]
-    [SerializeField] public int id;
-    [SerializeField] public string ItemName;
-    [SerializeField] public string description;
-
+    public Sprite Icon => icon;
     public int ID => id;
     public int MaxStack => maxStack;
     public bool IsStackable => isStackable;

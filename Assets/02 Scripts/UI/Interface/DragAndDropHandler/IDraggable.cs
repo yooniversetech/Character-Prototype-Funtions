@@ -2,12 +2,13 @@ using UnityEngine;
 
 public interface IDraggable
 {
-    ItemData Data { get; }
-    ICell CurrentCell { get; set; }
     int CurrentStack {  get; set; }
     int ItemID {  get; }
     int MaxStack { get; }
-    bool isFull { get; }
+    bool IsFull { get; }
+    ICell CurrentCell { get; set; }
 
-    void Initialize(ItemData info, int stack);
+    void SetCell(ICell newCell);
+    void AddStack(int amount);
+    void RemoveStack(int amount);
 }

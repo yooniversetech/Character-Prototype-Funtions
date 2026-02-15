@@ -2,21 +2,24 @@ using UnityEngine;
 
 public class InventoryItem : IDraggable
 {
-    public ItemData ItemData { get; private set; }
+    private ItemData data;
+
+    public int ItemID => data.ID; 
+
+    public int MaxStack => data.MaxStack;
+
+    public bool IsFull => CurrentStack >= MaxStack;
 
     public int CurrentStack {  get; private set; }
     public ICell CurrentCell { get; private set; }
 
-
-
     ICell IDraggable.CurrentCell { get => CurrentCell; set => CurrentCell = value; }
     int IDraggable.CurrentStack { get => CurrentStack; set => CurrentStack = value; }
 
-    public ItemData Data => throw new System.NotImplementedException();
 
     public InventoryItem(ItemData itemData, int amount = 1)
     {
-        this.ItemData = itemData;
+        this.data = itemData;
         this.CurrentStack = amount;
     }
 

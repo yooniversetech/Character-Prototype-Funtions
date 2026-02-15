@@ -4,16 +4,20 @@ using UnityEngine;
 public class ItemData : ScriptableObject
 {
     // 모든 아이템에 필요한 데이터 필드
-    public Sprite icon;
+    public Sprite Icon;
 
     public bool isStackable;
     public int defalutStack = 1;
     public int maxStack;
 
     [TextArea]
-    public int ID;
-    public string itemName;
-    public string description;
+    [SerializeField] public int id;
+    [SerializeField] public string ItemName;
+    [SerializeField] public string description;
+
+    public int ID => id;
+    public int MaxStack => maxStack;
+    public bool IsStackable => isStackable;
 }
 
 #region Inherited Data ( ItemData를 상속받은 데이터 클래스 목록들)
@@ -23,18 +27,18 @@ public class ItemData : ScriptableObject
 [CreateAssetMenu(fileName = "New ConsumableItem", menuName = "Items / Consumable")]
 public class ConsumableItemData : ItemData
 {
-    public float healAmount;
-    public float duration;
-    public ItemType type;
+    public float HealAmount;
+    public float Duration;
+    public ItemType Type;
 }
 
 [CreateAssetMenu(fileName = "New EquipmentItem", menuName = "Items / Equipment")]
 
 public class EquipmentItemData : ItemData
 {
-    public int attackPower;
-    public int defense;
-    public ItemType type;
+    public int AttackPower;
+    public int Defense;
+    public ItemType Type;
 }
 #endregion
 

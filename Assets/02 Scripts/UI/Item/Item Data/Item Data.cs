@@ -3,18 +3,19 @@ using UnityEngine;
 #region ItemDatas (모든 아이템 데이터들)
 public class ItemData : ScriptableObject
 {
+    [SerializeField] private Sprite iconSprite;
     // 모든 아이템에 필요한 데이터 필드
     [TextArea]
-    [SerializeField] private Sprite icon;
-    [SerializeField] public int id;
-    [SerializeField] public string ItemName;
-    [SerializeField] public string description;
+
+    [SerializeField] private int id;
+    [SerializeField] private string ItemName;
+    [SerializeField] private string description;
 
     public bool isStackable;
     public int defalutStack = 1;
     public int maxStack;
 
-    public Sprite Icon => icon;
+    public Sprite IconSprite => iconSprite;
     public int ID => id;
     public int MaxStack => maxStack;
     public bool IsStackable => isStackable;

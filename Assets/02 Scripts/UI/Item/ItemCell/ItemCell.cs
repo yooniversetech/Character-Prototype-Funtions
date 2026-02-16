@@ -24,7 +24,7 @@ public class ItemCell : MonoBehaviour, ICell
         {
             if (itemIcon != null)
             {
-                itemIcon.sprite = draggable.Data.Icon;
+                itemIcon.sprite = draggable.Data.IconSprite;
                 itemIcon.gameObject.SetActive(true);
             }
         }

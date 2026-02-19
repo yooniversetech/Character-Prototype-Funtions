@@ -9,9 +9,11 @@ public class CameraPivotController : MonoBehaviour
     private float mouseSensitivity = 150f;         // 마우스 감도
     private float xRotation = 0f;                  // 현제 위아래 각도
 
-    private void Start()
+    private bool _canRotate = true;
+
+    private void Awake()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        CursorManager.OnUIModeChanged += HandleUIMode;
     }
 
     private void Update()
@@ -27,5 +29,10 @@ public class CameraPivotController : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+    }
+
+    private void HandleUIMode(bool isUIOpen)
+    {
+        _canRotate = !isUIOpen;
     }
 }

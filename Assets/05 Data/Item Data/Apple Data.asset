@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: Apple Data
   m_EditorClassIdentifier: Assembly-CSharp::ConsumableItemData
-  iconSprite: {fileID: 0}
+  iconSprite: {fileID: 21300000, guid: 8dc40d1d8d23e89478e2374ee8579068, type: 3}
   id: 0
   ItemName: "\uC0AC\uACFC"
   description: "\uCC44\uB825 +5 \\n \uD5C8\uAE30 +5 \\n \uC218\uBD84 +10"

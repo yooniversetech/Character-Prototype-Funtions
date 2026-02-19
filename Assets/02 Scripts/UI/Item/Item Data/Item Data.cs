@@ -1,6 +1,5 @@
 using UnityEngine;
 
-#region ItemDatas (모든 아이템 데이터들)
 public class ItemData : ScriptableObject
 {
     [SerializeField] private Sprite iconSprite;
@@ -41,8 +40,6 @@ public class EquipmentItemData : ItemData
     public int Defense;
     public ItemType Type;
 }
-#endregion
-
 #endregion
 
 #region Enumerated ItemTypes (열거된 아이템 타입 목록)

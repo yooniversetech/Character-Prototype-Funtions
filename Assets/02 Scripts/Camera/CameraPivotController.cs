@@ -14,6 +14,7 @@ public class CameraPivotController : MonoBehaviour
     private void Awake()
     {
         CursorManager.OnUIModeChanged += HandleUIMode;
+        HandleUIMode(Cursor.lockState == CursorLockMode.None);
     }
 
     private void Update()

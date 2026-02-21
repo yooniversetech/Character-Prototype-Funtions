@@ -17,6 +17,9 @@ public class UIInputManager : MonoBehaviour
     // 여기서 다른 UI 관련 입력들을 모두 처리 (가독성을 위함)
     private void CheckUIInputs()
     {
-        if (Input.GetKeyDown(KeyCode.I)) inventory.Toggle();
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            inventory.Toggle();
+        }
     }
 }

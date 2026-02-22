@@ -10,7 +10,7 @@ public class CameraZoom : MonoBehaviour
     [SerializeField] private float currentDis = 5.0f; // 현제 캐릭터와 카메라의 거리
     [SerializeField] private float minDis = 2.0f;     // 카메라 줌 최소 거리
     [SerializeField] private float maxDis = 10.0f;    // 카메라 줌 최대 거리
-    [SerializeField] private float smoothTime = 1f; // 카메라 줌 속도
+    //[SerializeField] private float smoothTime = 1f;   // 카메라 줌 속도
 
     [SerializeField] private float currentVelocity;
 

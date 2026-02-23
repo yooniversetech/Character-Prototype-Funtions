@@ -26,11 +26,19 @@ public class ItemCell : MonoBehaviour, ICell
             {
                 itemIcon.sprite = draggable.Data.IconSprite;
                 itemIcon.gameObject.SetActive(true);
+
+                if (!itemIcon.gameObject.TryGetComponent<InventoryItemDraggable>(out var draggingScript))
+                {
+                    itemIcon.gameObject.AddComponent<InventoryItemDraggable>();
+                }
             }
         }
         else
         {
-            if (itemIcon != null) itemIcon.gameObject.SetActive(false);
+            if (itemIcon != null)
+            {
+                itemIcon.gameObject.SetActive(false);
+            }
         }
     }
 

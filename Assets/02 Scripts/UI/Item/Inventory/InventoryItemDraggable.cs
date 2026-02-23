@@ -43,6 +43,8 @@ public class InventoryItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHan
         {
             transform.SetParent(originalParent);
             transform.localPosition = Vector3.zero;
+
+            canvasGroup.alpha = 1f;
         }
     }
 }

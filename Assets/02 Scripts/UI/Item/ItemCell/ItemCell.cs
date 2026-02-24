@@ -1,13 +1,16 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class ItemCell : MonoBehaviour, ICell
+public class ItemCell : MonoBehaviour, ICell, IDropHandler
 {
     [SerializeField] private Image itemIcon;
     public IDraggable ContainedItem { get; private set; }
     public bool IsEmpty => ContainedItem == null;
+
+    public IItemData currentItemData;
 
     public bool CanAccept(IDraggable draggable)
     {
@@ -24,7 +27,7 @@ public class ItemCell : MonoBehaviour, ICell
         {
             if (itemIcon != null)
             {
-                itemIcon.sprite = draggable.Data.IconSprite;
+                itemIcon.sprite = draggable.Data.ItemIcon;
                 itemIcon.gameObject.SetActive(true);
 
                 if (!itemIcon.gameObject.TryGetComponent<InventoryItemDraggable>(out var draggingScript))
@@ -45,5 +48,27 @@ public class ItemCell : MonoBehaviour, ICell
     public void ClearCell()
     {
         ContainedItem = null;
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        GameObject draggedObject = eventData.pointerDrag;
+
+        if (draggedObject != null)
+        {
+            var draggedItem = draggedObject.GetComponent<InventoryItemDraggable>();
+
+            if (draggedItem != null)
+            {
+                ExecuteDrop(draggedItem);
+            }
+        }
+    }
+
+    private void ExecuteDrop(InventoryItemDraggable draggedItem)
+    {
+        draggedItem.transform.SetParent(this.transform);
+        draggedItem.transform.localPosition = Vector3.zero;
+        this.currentItemData = draggedItem.itemData;
     }
 }

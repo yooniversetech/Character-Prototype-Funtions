@@ -9,6 +9,8 @@ public class InventoryItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHan
     private Transform originalParent;
     private Canvas canvas;
 
+    public IItemData itemData { get; private set; }
+
     private void Awake()
     {
         if (canvasGroup == null) canvasGroup = gameObject.AddComponent<CanvasGroup>();
@@ -37,6 +39,7 @@ public class InventoryItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHan
     {
         Debug.Log("드래그 종료");
 
+        canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
 
         if (transform.parent == canvas.transform)
@@ -44,7 +47,6 @@ public class InventoryItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHan
             transform.SetParent(originalParent);
             transform.localPosition = Vector3.zero;
 
-            canvasGroup.alpha = 1f;
         }
     }
 }

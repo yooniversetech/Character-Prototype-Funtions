@@ -4,7 +4,7 @@ public class InventoryItem : IDraggable
 {
     // 아이템 데이터에서 사용될 필드
     public ItemData Data { get; private set; }
-    public int ItemID => Data.ID; 
+    public int ItemID => Data.ItemID; 
     public int MaxStack => Data.MaxStack;
     public bool IsFull => CurrentStack >= MaxStack;
 

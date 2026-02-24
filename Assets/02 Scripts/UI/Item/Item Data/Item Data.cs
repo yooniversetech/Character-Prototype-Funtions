@@ -1,21 +1,24 @@
 using UnityEngine;
 
-public class ItemData : ScriptableObject
+public class ItemData : ScriptableObject, IItemData
 {
-    [SerializeField] private Sprite iconSprite;
     // 모든 아이템에 필요한 데이터 필드
-    [TextArea]
 
-    [SerializeField] private int id;
-    [SerializeField] private string ItemName;
-    [SerializeField] private string description;
+    [SerializeField] private int itemID;
+    [SerializeField] private Sprite itemIcon;
+    [SerializeField] private string itemName;
+
+    [TextArea] [SerializeField] private string description;
 
     public bool isStackable;
     public int defalutStack = 1;
     public int maxStack;
 
-    public Sprite IconSprite => iconSprite;
-    public int ID => id;
+    public int ItemID => itemID;
+    public string ItemName => itemName;
+    public Sprite ItemIcon => itemIcon;
+    public string Description => description;
+
     public int MaxStack => maxStack;
     public bool IsStackable => isStackable;
 }

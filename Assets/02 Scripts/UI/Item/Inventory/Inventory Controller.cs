@@ -53,7 +53,7 @@ public class InventoryController : BaseUI
         {
             foreach (var cell in cells)
             {
-                if (!cell.IsEmpty && cell.ContainedItem.ItemID == data.ID)
+                if (!cell.IsEmpty && cell.ContainedItem.ItemID == data.ItemID)
                 {
                     IDraggable targetItem = cell.ContainedItem;
 

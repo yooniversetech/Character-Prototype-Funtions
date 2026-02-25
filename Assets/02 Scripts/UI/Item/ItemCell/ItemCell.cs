@@ -53,6 +53,10 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         GameObject draggedObject = eventData.pointerDrag;
+        if (draggedObject == null) return;
+
+        var draggedItem = draggedObject.GetComponent<InventoryItemDraggable>();
+        if (draggedItem == null) return;
 
         if (draggedObject != null)
         {

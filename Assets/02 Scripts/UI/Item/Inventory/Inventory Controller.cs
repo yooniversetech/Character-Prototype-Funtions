@@ -7,6 +7,8 @@ public class InventoryController : BaseUI
 {
     [Header("테스트용 데이터")]
     [SerializeField] private ItemData itemData;
+    [SerializeField] private ItemData itemData2;
+    [SerializeField] private ItemData itemData3;
 
     [Header("슬롯 설정")]
     [SerializeField] private ItemCell[] cells;
@@ -25,8 +27,14 @@ public class InventoryController : BaseUI
     {
         if (itemData != null && cells.Length > 0)
         {
-            InventoryItem newItem = new InventoryItem(itemData, 10);
+            InventoryItem newItem = new InventoryItem(itemData, 1);
             cells[0].SetItem(newItem);
+
+            InventoryItem newItem2 = new InventoryItem(itemData, 1);
+            cells[1].SetItem(newItem);
+
+            InventoryItem newItem3 = new InventoryItem(itemData3, 1);
+            cells[2].SetItem(newItem3);
         }
     }
 
@@ -71,6 +79,14 @@ public class InventoryController : BaseUI
             }
         }
         return true;
+    }
+
+    public void AddItem(ItemData data, int amount)
+    {
+        if (CanAddItem(data, amount))
+        {
+            
+        }
     }
 
 

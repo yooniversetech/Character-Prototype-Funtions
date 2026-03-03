@@ -6,10 +6,11 @@ public class InventoryItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHan
     [Header("UI Components")]
     [SerializeField] private CanvasGroup canvasGroup;
 
-    private Transform originalParent;
     private Canvas canvas;
 
+    public Transform originalParent;
     public IItemData itemData { get; private set; }
+    public ItemData existingItem { get; private set; }
 
     private void Awake()
     {
@@ -46,7 +47,6 @@ public class InventoryItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHan
         {
             transform.SetParent(originalParent);
             transform.localPosition = Vector3.zero;
-
         }
     }
 }

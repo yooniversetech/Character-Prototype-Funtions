@@ -19,6 +19,11 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler
         return true;
     }
 
+    /// <summary>
+    /// 테스트 및 데모용으로 간단히 구현한 메서드입니다.
+    /// 실제 게임에서는 아이템 타입, 스택 가능 여부 등을 고려하여 더 복잡한 로직이 필요할 수 있습니다.
+    /// </summary>
+    /// <param name="draggable"></param>
     public void SetItem(IDraggable draggable)
     {
         ContainedItem = draggable;
@@ -58,15 +63,21 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler
         var draggedItem = draggedObject.GetComponent<InventoryItemDraggable>();
         if (draggedItem == null) return;
 
-        if (draggedObject != null)
+        if (this.currentItemData != null)
         {
-            var draggedItem = draggedObject.GetComponent<InventoryItemDraggable>();
-
-            if (draggedItem != null)
+            InventoryItemDraggable existingItem = GetComponentInChildren<InventoryItemDraggable>();
+            
+            if (existingItem != null)
             {
-                ExecuteDrop(draggedItem);
+                existingItem.transform.SetParent(draggedItem.originalParent);
+                existingItem.transform.localPosition = Vector3.zero;
+
+                var originCell = draggedItem.originalParent.GetComponent<ItemCell>();
+                originCell.currentItemData = existingItem.itemData;
             }
         }
+
+        ExecuteDrop(draggedItem);
     }
 
     private void ExecuteDrop(InventoryItemDraggable draggedItem)

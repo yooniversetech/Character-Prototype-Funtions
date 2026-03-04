@@ -9,4 +9,6 @@ public interface IItemData
     Sprite ItemIcon { get; }
 
     string Description { get; }
+
+    int MaxStack { get; }
 }

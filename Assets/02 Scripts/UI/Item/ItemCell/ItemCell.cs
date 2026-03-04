@@ -4,13 +4,15 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class ItemCell : MonoBehaviour, ICell, IDropHandler
+public class ItemCell : MonoBehaviour, ICell, IDropHandler, IDropRule, IItemSlot
 {
     [SerializeField] private Image itemIcon;
     public IDraggable ContainedItem { get; private set; }
     public bool IsEmpty => ContainedItem == null;
 
     public IItemData currentItemData;
+
+    private int currentStack = 1;
 
     public bool CanAccept(IDraggable draggable)
     {
@@ -85,5 +87,19 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler
         draggedItem.transform.SetParent(this.transform);
         draggedItem.transform.localPosition = Vector3.zero;
         this.currentItemData = draggedItem.itemData;
+    }
+
+    public bool IsMatch(ItemCell targetCell, InventoryItemDraggable draggableItem)
+    {
+        if (targetCell == null) return false;
+        if (targetCell.currentItemData.ItemID != draggableItem.itemData.ItemID) return false;
+        if (targetCell.currentItemData.CurrentStack >= targetCell.currentItemData.MaxStack) return false;
+
+        return true;
+    }
+
+    public void Execute(ItemCell targetCell, InventoryItemDraggable draggableItem)
+    {
+        
     }
 }

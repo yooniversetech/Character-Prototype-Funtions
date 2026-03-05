@@ -6,13 +6,22 @@ using UnityEngine.UI;
 [System.Serializable]
 public class ItemCell : MonoBehaviour, ICell, IDropHandler, IDropRule, IItemSlot
 {
+    // --- [1. Inspector / UI References] ---
     [SerializeField] private Image itemIcon;
-    public IDraggable ContainedItem { get; private set; }
-    public bool IsEmpty => ContainedItem == null;
 
+    // --- [2. Internal States / Data] ---
+    private int currentStack = 1;
     public IItemData currentItemData;
 
-    private int currentStack = 1;
+    // --- [3. Interface Implementations (IItemSlot)] ---
+    public IItemData ItemData => currentItemData;
+    public int CurrentStack
+    {
+        get => currentStack;
+        set => currentStack = value;
+    }
+    public bool IsEmpty => ContainedItem == null;
+    public IDraggable ContainedItem { get; private set; }
 
     public bool CanAccept(IDraggable draggable)
     {
@@ -52,48 +61,20 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IDropRule, IItemSlot
         }
     }
 
+    public void OnDrop(PointerEventData eventData)
+    {
+        DropProcessManager.Instance.ProcessDrop(this, eventData);
+    }
     public void ClearCell()
     {
         ContainedItem = null;
-    }
-
-    public void OnDrop(PointerEventData eventData)
-    {
-        GameObject draggedObject = eventData.pointerDrag;
-        if (draggedObject == null) return;
-
-        var draggedItem = draggedObject.GetComponent<InventoryItemDraggable>();
-        if (draggedItem == null) return;
-
-        if (this.currentItemData != null)
-        {
-            InventoryItemDraggable existingItem = GetComponentInChildren<InventoryItemDraggable>();
-            
-            if (existingItem != null)
-            {
-                existingItem.transform.SetParent(draggedItem.originalParent);
-                existingItem.transform.localPosition = Vector3.zero;
-
-                var originCell = draggedItem.originalParent.GetComponent<ItemCell>();
-                originCell.currentItemData = existingItem.itemData;
-            }
-        }
-
-        ExecuteDrop(draggedItem);
-    }
-
-    private void ExecuteDrop(InventoryItemDraggable draggedItem)
-    {
-        draggedItem.transform.SetParent(this.transform);
-        draggedItem.transform.localPosition = Vector3.zero;
-        this.currentItemData = draggedItem.itemData;
     }
 
     public bool IsMatch(ItemCell targetCell, InventoryItemDraggable draggableItem)
     {
         if (targetCell == null) return false;
         if (targetCell.currentItemData.ItemID != draggableItem.itemData.ItemID) return false;
-        if (targetCell.currentItemData.CurrentStack >= targetCell.currentItemData.MaxStack) return false;
+        if (targetCell.CurrentStack >= targetCell.currentItemData.MaxStack) return false;
 
         return true;
     }

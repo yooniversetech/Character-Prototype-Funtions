@@ -11,6 +11,12 @@ public class InventoryItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHan
     public Transform originalParent;
     public IItemData itemData { get; private set; }
     public ItemData existingItem { get; private set; }
+    private int currentStack = 1;
+    public int CurrentStack
+    {
+        get => currentStack;
+        set => currentStack = value;
+    }
 
     private void Awake()
     {

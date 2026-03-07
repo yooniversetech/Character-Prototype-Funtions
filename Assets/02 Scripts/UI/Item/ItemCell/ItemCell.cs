@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class ItemCell : MonoBehaviour, ICell, IDropHandler, IDropRule, IItemSlot
+public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot
 {
     // --- [1. Inspector / UI References] ---
     [SerializeField] private Image itemIcon;
@@ -70,17 +70,5 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IDropRule, IItemSlot
         ContainedItem = null;
     }
 
-    public bool IsMatch(ItemCell targetCell, InventoryItemDraggable draggableItem)
-    {
-        if (targetCell == null) return false;
-        if (targetCell.currentItemData.ItemID != draggableItem.itemData.ItemID) return false;
-        if (targetCell.CurrentStack >= targetCell.currentItemData.MaxStack) return false;
 
-        return true;
-    }
-
-    public void Execute(ItemCell targetCell, InventoryItemDraggable draggableItem)
-    {
-        
-    }
 }

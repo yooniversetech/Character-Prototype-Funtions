@@ -15,11 +15,9 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot
 
     // --- [3. Interface Implementations (IItemSlot)] ---
     public IItemData ItemData => currentItemData;
-    public int CurrentStack
-    {
-        get => currentStack;
-        set => currentStack = value;
-    }
+    public int CurrentStack { get => currentStack;set => currentStack = value; }
+
+
     public bool IsEmpty => ContainedItem == null;
     public IDraggable ContainedItem { get; private set; }
 
@@ -63,12 +61,48 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot
 
     public void OnDrop(PointerEventData eventData)
     {
+        var draggedItem = eventData.pointerDrag?.GetComponent<InventoryItemDraggable>();
+        if (draggedItem == null) return;
+
         DropProcessManager.Instance.ProcessDrop(this, eventData);
+        draggedItem.ArrangeUI();
     }
+    
+    private void ArrangeUI()
+    {
+        if (CurrentStack <= 0)
+        {
+            FinishDragging();
+            return;
+        }
+
+        transform.localPosition = Vector3.zero;
+
+        var canvasGroup = GetComponent<CanvasGroup>();
+        if (canvasGroup != null) GetComponent<CanvasGroup>().blocksRaycasts = true;
+    }
+    
     public void ClearCell()
     {
         ContainedItem = null;
     }
 
+    private void FinishDragging()
+    {
+        currentStack = 0;
+        currentItemData = null;
 
+        var canvasGroup = GetComponent<CanvasGroup>();
+        if (canvasGroup != null)
+        {
+            canvasGroup.blocksRaycasts = true;
+            canvasGroup.alpha = 1f;
+        }
+        gameObject.SetActive(false);
+
+        if (currentStack > 0 && currentItemData != null)
+        {
+            Destroy(gameObject);
+        }
+    }
 }

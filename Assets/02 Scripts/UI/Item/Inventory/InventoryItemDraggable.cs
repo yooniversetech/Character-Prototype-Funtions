@@ -55,4 +55,23 @@ public class InventoryItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHan
             transform.localPosition = Vector3.zero;
         }
     }
+
+    public void ArrangeUI()
+    {
+        if (CurrentStack <= 0)
+        {
+            FinishDragging();
+            return;
+        }
+
+        transform.localPosition = Vector3.zero;
+
+        var canvasGroup = GetComponent<CanvasGroup>();
+        if (canvasGroup != null) GetComponent<CanvasGroup>().blocksRaycasts = true;
+    }
+
+    private void FinishDragging()
+    {
+        Destroy(gameObject);
+    }
 }

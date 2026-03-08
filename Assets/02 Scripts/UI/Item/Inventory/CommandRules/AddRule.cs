@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AddRule : MonoBehaviour, IDropRule
+public class AddRule : IDropRule
 {
     /// <summary>
     /// 커맨드 패턴에서 사용될 메서드로, 드랍된 아이템이 스택이 가능한지 여부를 판단
@@ -10,8 +10,14 @@ public class AddRule : MonoBehaviour, IDropRule
     /// <returns></returns>
     public bool IsMatch(ItemCell targetCell, InventoryItemDraggable draggableItem)
     {
-        if (targetCell == null) return false;
-        if (targetCell.currentItemData.ItemID != draggableItem.itemData.ItemID) return false;
+
+        if (targetCell == null) { Debug.Log("1"); return false; }
+        if (targetCell.currentItemData == null) { Debug.Log("2"); return false; }
+        if (targetCell.currentItemData.ItemID != draggableItem.itemData.ItemID)
+        {
+            Debug.Log($"타겟 ID: {targetCell.ItemData.ItemID}, 드래그 ID: {draggableItem.itemData.ItemID}");
+            return false;
+        }
         if (targetCell.CurrentStack >= targetCell.currentItemData.MaxStack) return false;
 
         return true;

@@ -16,10 +16,9 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot
     // --- [3. Interface Implementations (IItemSlot)] ---
     public IItemData ItemData => currentItemData;
     public int CurrentStack { get => currentStack;set => currentStack = value; }
-
-
     public bool IsEmpty => ContainedItem == null;
     public IDraggable ContainedItem { get; private set; }
+
 
     public bool CanAccept(IDraggable draggable)
     {
@@ -32,30 +31,29 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot
     /// 테스트 및 데모용으로 간단히 구현한 메서드입니다.
     /// 실제 게임에서는 아이템 타입, 스택 가능 여부 등을 고려하여 더 복잡한 로직이 필요할 수 있습니다.
     /// </summary>
-    /// <param name="draggable"></param>
-    public void SetItem(IDraggable draggable)
+    /// <param name="data"></param>
+    /// <param name="stack"></param>
+    public void SetItem(IItemData data, int stack)
     {
-        ContainedItem = draggable;
+        this.currentItemData = data;
+        this.CurrentStack = stack;
 
-        if (draggable != null)
+        if (data != null && stack > 0)
         {
             if (itemIcon != null)
             {
-                itemIcon.sprite = draggable.Data.ItemIcon;
+                itemIcon.sprite = data.ItemIcon;
                 itemIcon.gameObject.SetActive(true);
 
-                if (!itemIcon.gameObject.TryGetComponent<InventoryItemDraggable>(out var draggingScript))
+                if (itemIcon.TryGetComponent<InventoryItemDraggable>(out var draggingScript))
                 {
-                    itemIcon.gameObject.AddComponent<InventoryItemDraggable>();
+                    draggingScript.Initialize(data, stack);
                 }
             }
         }
         else
         {
-            if (itemIcon != null)
-            {
-                itemIcon.gameObject.SetActive(false);
-            }
+            ClearCell();
         }
     }
 
@@ -64,45 +62,14 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot
         var draggedItem = eventData.pointerDrag?.GetComponent<InventoryItemDraggable>();
         if (draggedItem == null) return;
 
-        DropProcessManager.Instance.ProcessDrop(this, eventData);
+        DropProcessManager.Instance.ProcessDrop(this, draggedItem);
         draggedItem.ArrangeUI();
-    }
-    
-    private void ArrangeUI()
-    {
-        if (CurrentStack <= 0)
-        {
-            FinishDragging();
-            return;
-        }
-
-        transform.localPosition = Vector3.zero;
-
-        var canvasGroup = GetComponent<CanvasGroup>();
-        if (canvasGroup != null) GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
     
     public void ClearCell()
     {
-        ContainedItem = null;
-    }
-
-    private void FinishDragging()
-    {
-        currentStack = 0;
         currentItemData = null;
-
-        var canvasGroup = GetComponent<CanvasGroup>();
-        if (canvasGroup != null)
-        {
-            canvasGroup.blocksRaycasts = true;
-            canvasGroup.alpha = 1f;
-        }
-        gameObject.SetActive(false);
-
-        if (currentStack > 0 && currentItemData != null)
-        {
-            Destroy(gameObject);
-        }
+        CurrentStack = 0;
+        if (itemIcon != null) itemIcon.gameObject.SetActive(false);
     }
 }

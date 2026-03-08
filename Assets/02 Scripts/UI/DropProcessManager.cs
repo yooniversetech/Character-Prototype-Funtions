@@ -4,11 +4,21 @@ using UnityEngine;
 
 public class DropProcessManager : MonoBehaviour
 {
-    public List<IDropRule> rules = new List<IDropRule>();
+    public List<IDropRule> _dropRules = new List<IDropRule>();
+    public static DropProcessManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+
+        _dropRules.Add(new AddRule());
+
+    }
 
     public void ProcessDrop(ItemCell targetCell, InventoryItemDraggable draggedItem)
     {
-        foreach (var rule in rules)
+        foreach (var rule in _dropRules)
         {
             if (rule.IsMatch(targetCell, draggedItem))
             {
@@ -16,14 +26,5 @@ public class DropProcessManager : MonoBehaviour
                 return;
             }
         }
-    }
-
-    public void ProcessAdd()
-    {
-
-    }
-    public void ProcessSetDown()
-    {
-
     }
 }

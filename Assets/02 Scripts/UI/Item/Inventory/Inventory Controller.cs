@@ -81,14 +81,6 @@ public class InventoryController : BaseUI
         return true;
     }
 
-    public void AddItem(ItemData data, int amount)
-    {
-        if (CanAddItem(data, amount))
-        {
-            
-        }
-    }
-
 
     private ItemCell FindEmptySlot()
     {

@@ -31,17 +31,17 @@ public class UIDataMovementDecision : MonoBehaviour
         return false;
     }
 
-    private void ExecuteSwap(IDraggable dragged, ICell target)
-    {
-        ICell sourceCell = dragged.CurrentCell;
-        IDraggable existingTargetItem = target.ContainedItem;
+    //private void ExecuteSwap(IDraggable dragged, ICell target)
+    //{
+    //    ICell sourceCell = dragged.CurrentCell;
+    //    IDraggable existingTargetItem = target.ContainedItem;
 
-        sourceCell.ClearCell();
-        if (existingTargetItem != null)
-        {
-            target.ClearCell();
-            sourceCell.SetItem(existingTargetItem);
-        }
-        target.SetItem(dragged);
-    }
+    //    sourceCell.ClearCell();
+    //    if (existingTargetItem != null)
+    //    {
+    //        target.ClearCell();
+    //        sourceCell.SetItem(existingTargetItem, 1);
+    //    }
+    //    target.SetItem(dragged);
+    //}
 }

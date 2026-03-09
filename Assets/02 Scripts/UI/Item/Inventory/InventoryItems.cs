@@ -1,12 +1,16 @@
 using UnityEngine;
 
-public class InventoryItem : IDraggable
+public class InventoryItem : IDraggable, IItemData
 {
     // 아이템 데이터에서 사용될 필드
     public ItemData Data { get; private set; }
     public int ItemID => Data.ItemID; 
     public int MaxStack => Data.MaxStack;
+    public string ItemName => Data.ItemName;
+    public Sprite ItemIcon => Data.ItemIcon;
+    public string Description => Data.Description;
     public bool IsFull => CurrentStack >= MaxStack;
+
 
     // 인벤토리 내부에서 사용될 실질적인 데이터
     public int CurrentStack {  get; private set; }

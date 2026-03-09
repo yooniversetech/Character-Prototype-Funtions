@@ -74,4 +74,12 @@ public class InventoryItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHan
     {
         Destroy(gameObject);
     }
+
+    public void Initialize(IItemData data, int stack)
+    {
+        this.itemData = data;
+        this.CurrentStack = stack;
+
+        Debug.Log($"{itemData.ItemID} 아이템 드래그 스크립트가 초기화되었습니다.");
+    }
 }

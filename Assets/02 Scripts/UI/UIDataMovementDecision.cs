@@ -10,19 +10,19 @@ public class UIDataMovementDecision : MonoBehaviour
         Instance = this;
     }
 
-    public void ProcessDrop(IDraggable draggableObject, ICell targetCell)
-    {
-        if (draggableObject.CurrentCell == targetCell) return;
+    //public void ProcessDrop(IDraggable draggableObject, ICell targetCell)
+    //{
+    //    if (draggableObject.CurrentCell == targetCell) return;
 
-        if (targetCell.CanAccept(draggableObject))
-        {
-            if (!targetCell.IsEmpty)
-            {
-                return;
-            }
-            ExecuteSwap(draggableObject, targetCell);
-        }
-    }
+    //    if (targetCell.CanAccept(draggableObject))
+    //    {
+    //        if (!targetCell.IsEmpty)
+    //        {
+    //            return;
+    //        }
+    //        ExecuteSwap(draggableObject, targetCell);
+    //    }
+    //}
 
     private bool TryMerge(IDraggable draggable, ICell target)
     {

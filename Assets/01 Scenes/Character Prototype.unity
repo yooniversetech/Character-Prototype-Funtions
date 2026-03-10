@@ -1529,7 +1529,7 @@ PrefabInstance:
     - target: {fileID: 1928134452887519488, guid: 31ea4bed14c04024c9fc489723db218c, type: 3}
       propertyPath: itemData2
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: ee0eacc53783cdd498fa127217965856, type: 2}
     - target: {fileID: 6203541974994528690, guid: 31ea4bed14c04024c9fc489723db218c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

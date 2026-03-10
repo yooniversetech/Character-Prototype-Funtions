@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: Grapes Data
+  m_Name: grape
   m_EditorClassIdentifier: Assembly-CSharp::ConsumableItemData
-  itemID: 2
+  itemID: 1
   itemIcon: {fileID: 21300000, guid: 2951143988db69b42807c65b8ab145ad, type: 3}
   itemName: "\uD3EC\uB3C4"
-  description: "\uCC44\uB825 +5 \\n \uD5C8\uAE30 +5 \\n \uC218\uBD84 +10"
+  description: 
   isStackable: 1
   defalutStack: 1
   maxStack: 64
-  HealAmount: 5
+  HealAmount: 3
   Duration: 0
   Type: 0

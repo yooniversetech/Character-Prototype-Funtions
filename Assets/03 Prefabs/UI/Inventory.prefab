@@ -3440,8 +3440,7 @@ MonoBehaviour:
   openSound: {fileID: 0}
   closeSound: {fileID: 0}
   itemData: {fileID: 11400000, guid: e87c579562cddd945a05ca7c53bf3a12, type: 2}
-  itemData2: {fileID: 11400000, guid: e87c579562cddd945a05ca7c53bf3a12, type: 2}
-  itemData3: {fileID: 11400000, guid: cb6afd6acd54c6d44a6333c3cf7951de, type: 2}
+  itemData2: {fileID: 11400000, guid: ee0eacc53783cdd498fa127217965856, type: 2}
   cells:
   - {fileID: 5255061784411876737}
   - {fileID: 4481378050250837712}

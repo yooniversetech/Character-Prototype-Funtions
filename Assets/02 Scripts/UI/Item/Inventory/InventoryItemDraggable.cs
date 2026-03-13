@@ -4,8 +4,7 @@ using UnityEngine.EventSystems;
 public class InventoryItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [Header("UI Components")]
-    [SerializeField] private CanvasGroup canvasGroup;
-
+    private CanvasGroup canvasGroup;
     private Canvas canvas;
 
     public Transform originalParent;
@@ -20,15 +19,13 @@ public class InventoryItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHan
 
     private void Awake()
     {
-        if (canvasGroup == null) canvasGroup = gameObject.AddComponent<CanvasGroup>();
-
-        canvas = GetComponentInParent<Canvas>();
+        canvasGroup = GetComponentInChildren<CanvasGroup>();  
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
         Debug.Log("드래그 시작");
 
-        canvasGroup.blocksRaycasts = false;
+        //canvasGroup.blocksRaycasts = false;
 
         originalParent = transform.parent;
         transform.SetParent(canvas.transform);
@@ -40,6 +37,7 @@ public class InventoryItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHan
     public void OnDrag(PointerEventData eventData)
     {
         transform.position = eventData.position;
+        Debug.Log("아이템 이동중");
     }
 
     public void OnEndDrag(PointerEventData eventData)

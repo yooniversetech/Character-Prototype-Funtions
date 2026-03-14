@@ -24,7 +24,7 @@ public class InventoryController : BaseUI
 
     private void Test_AssignItem()
     {
-        if (itemData != null && cells.Length > 0)
+        if (itemData != null && itemData2 != null && cells.Length > 0)
         {
             InventoryItem testItem = new InventoryItem(itemData, 1);
             cells[0].SetItem(testItem, 1);
@@ -79,7 +79,6 @@ public class InventoryController : BaseUI
         }
         return true;
     }
-
 
     private ItemCell FindEmptySlot()
     {

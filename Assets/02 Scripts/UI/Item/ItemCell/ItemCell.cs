@@ -38,8 +38,11 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot
         this.currentItemData = data;
         this.CurrentStack = stack;
 
+
         if (data != null && stack > 0)
         {
+            Debug.Log(currentItemData.ItemName);
+
             if (itemIcon != null)
             {
                 itemIcon.sprite = data.ItemIcon;

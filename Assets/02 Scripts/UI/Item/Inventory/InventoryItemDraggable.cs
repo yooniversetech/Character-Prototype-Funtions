@@ -19,13 +19,14 @@ public class InventoryItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHan
 
     private void Awake()
     {
-        canvasGroup = GetComponentInChildren<CanvasGroup>();  
+        canvas = GetComponentInParent<Canvas>();
+        canvasGroup = GetComponentInChildren<CanvasGroup>();
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("드래그 시작");
+        //Debug.Log("드래그 시작");
 
-        //canvasGroup.blocksRaycasts = false;
+        canvasGroup.blocksRaycasts = false;
 
         originalParent = transform.parent;
         transform.SetParent(canvas.transform);
@@ -37,17 +38,16 @@ public class InventoryItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHan
     public void OnDrag(PointerEventData eventData)
     {
         transform.position = eventData.position;
-        Debug.Log("아이템 이동중");
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("드래그 종료");
+        //Debug.Log("드래그 종료");
 
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
 
-        if (transform.parent == canvas.transform)
+        if (transform.parent != originalParent)
         {
             transform.SetParent(originalParent);
             transform.localPosition = Vector3.zero;

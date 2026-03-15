@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8226975008933975449}
+  - component: {fileID: 6747950331869496426}
   m_Layer: 5
   m_Name: Hot Bar Slot (1)
   m_TagString: Untagged
@@ -39,6 +40,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -540}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6747950331869496426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3165973121930549899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2051d778186c5f4489d9c73a278fff37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 3905732620868587508}
+  currentStack: 1
 --- !u!1001 &443378800308391241
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -344,6 +359,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f67a1e324772e54488b79a6dbea310ae, type: 3}
+--- !u!114 &3905732620868587508 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6376804445506813648, guid: f67a1e324772e54488b79a6dbea310ae, type: 3}
+  m_PrefabInstance: {fileID: 7948016594869268772}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6921754298239047510 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1027388234688489074, guid: f67a1e324772e54488b79a6dbea310ae, type: 3}

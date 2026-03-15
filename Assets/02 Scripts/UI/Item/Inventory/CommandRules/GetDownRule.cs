@@ -14,7 +14,13 @@ public class GetDownRule : MonoBehaviour, IDropRule
 
         if (IsMatch(targetCell, draggableItem))
         {
-
+            GetDownItem(targetCell, draggableItem);
         }
+    }
+
+    private void GetDownItem(ItemCell targetCell, InventoryItemDraggable draggableItem)
+    {
+        targetCell.CurrentStack = draggableItem.CurrentStack;
+        draggableItem.CurrentStack = 0;
     }
 }

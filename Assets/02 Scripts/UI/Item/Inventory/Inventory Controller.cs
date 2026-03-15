@@ -33,7 +33,7 @@ public class InventoryController : BaseUI
             cells[1].SetItem(testItem, 1);
 
             InventoryItem testItem3 = new InventoryItem(itemData2, 1);
-            cells[2].SetItem(testItem3, 1);
+            cells[4].SetItem(testItem3, 1);
         }
     }
 

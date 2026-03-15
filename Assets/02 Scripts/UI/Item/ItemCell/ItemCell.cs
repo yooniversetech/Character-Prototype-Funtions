@@ -10,16 +10,19 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot
     [SerializeField] private Image itemIcon;
 
     // --- [2. Internal States / Data] ---
-    private int currentStack = 1;
+    [SerializeField] private int currentStack = 1;
     public IItemData currentItemData;
 
     // --- [3. Interface Implementations (IItemSlot)] ---
     public IItemData ItemData => currentItemData;
-    public int CurrentStack { get => currentStack;set => currentStack = value; }
+    public int CurrentStack { get => currentStack; set => currentStack = value; }
     public bool IsEmpty => ContainedItem == null;
     public IDraggable ContainedItem { get; private set; }
 
-
+    private void Start()
+    {
+        UpdateUI();
+    }
     public bool CanAccept(IDraggable draggable)
     {
         // 아이템이면 아이템만 받게끔 로직 필요
@@ -37,7 +40,6 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot
     {
         this.currentItemData = data;
         this.CurrentStack = stack;
-
 
         if (data != null && stack > 0)
         {
@@ -57,6 +59,7 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot
         else
         {
             ClearCell();
+            AssignData(data, stack);
         }
     }
 
@@ -71,8 +74,29 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot
     
     public void ClearCell()
     {
-        currentItemData = null;
-        CurrentStack = 0;
-        if (itemIcon != null) itemIcon.gameObject.SetActive(false);
+        this.currentItemData = null;
+        this.CurrentStack = 0;
+        UpdateUI();
+    }
+
+    public void AssignData(IItemData data, int stack)
+    {
+        this.currentItemData = data;
+        this.CurrentStack = stack;
+        UpdateUI();
+    }
+
+    public void UpdateUI()
+    {
+        if (currentItemData != null)
+        {
+            itemIcon.sprite = currentItemData.ItemIcon;
+            itemIcon.gameObject.SetActive(true);
+        }
+        else
+        {
+            itemIcon.sprite = null;
+            itemIcon.gameObject.SetActive(false);
+        }
     }
 }

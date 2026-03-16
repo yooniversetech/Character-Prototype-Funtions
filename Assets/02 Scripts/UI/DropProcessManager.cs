@@ -12,7 +12,7 @@ public class DropProcessManager : MonoBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
 
-        _dropRules.Add(new AddRule());
+        _dropRules.Add(new MergeStrategy());
 
     }
 

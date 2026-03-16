@@ -1,6 +1,7 @@
+using System.Data.Common;
 using UnityEngine;
 
-public class GetDownRule : MonoBehaviour, IDropRule
+public class GetDownStrategy : MonoBehaviour, IDropRule
 {
     public bool IsMatch(ItemCell targetCell, InventoryItemDraggable draggableItem)
     {
@@ -14,13 +15,14 @@ public class GetDownRule : MonoBehaviour, IDropRule
 
         if (IsMatch(targetCell, draggableItem))
         {
-            GetDownItem(targetCell, draggableItem);
+            GetDownItem(targetCell, targetCell);
         }
     }
 
-    private void GetDownItem(ItemCell targetCell, InventoryItemDraggable draggableItem)
+    private void GetDownItem(ItemCell source, ItemCell target, InventoryItemDraggable draggableItem)
     {
-        targetCell.CurrentStack = draggableItem.CurrentStack;
-        draggableItem.CurrentStack = 0;
+        
+        source.AssignData(source.currentItemData, source.CurrentStack);
+        source.UpdateUI();
     }
 }

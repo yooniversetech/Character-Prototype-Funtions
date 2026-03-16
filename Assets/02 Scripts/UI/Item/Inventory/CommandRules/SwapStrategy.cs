@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SwapRule : MonoBehaviour, IDropRule
+public class SwapStrategy : MonoBehaviour, IDropRule
 {
     public bool IsMatch(ItemCell targetCell, InventoryItemDraggable draggableItem)
     {

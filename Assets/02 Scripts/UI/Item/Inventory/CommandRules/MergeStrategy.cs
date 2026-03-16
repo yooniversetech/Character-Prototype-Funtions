@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AddRule : IDropRule
+public class MergeStrategy : IDropRule
 {
     /// <summary>
     /// 커맨드 패턴에서 사용될 메서드로, 드랍된 아이템이 스택이 가능한지 여부를 판단

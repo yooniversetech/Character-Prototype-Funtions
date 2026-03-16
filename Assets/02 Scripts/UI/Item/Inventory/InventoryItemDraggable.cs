@@ -7,6 +7,7 @@ public class InventoryItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHan
     private CanvasGroup canvasGroup;
     private Canvas canvas;
 
+    public static ItemCell _SourceCell;
     public Transform originalParent;
     public IItemData itemData { get; private set; }
     public ItemData existingItem { get; private set; }
@@ -25,6 +26,7 @@ public class InventoryItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHan
     public void OnBeginDrag(PointerEventData eventData)
     {
         //Debug.Log("드래그 시작");
+        _SourceCell = this.GetComponent<ItemCell>();
 
         canvasGroup.blocksRaycasts = false;
 

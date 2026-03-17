@@ -13,7 +13,7 @@ public class DropProcessManager : MonoBehaviour
         else Destroy(gameObject);
 
         _dropRules.Add(new MergeStrategy());
-
+        _dropRules.Add(new GetDownStrategy());
     }
 
     public void ProcessDrop(ItemCell targetCell, InventoryItemDraggable draggedItem)

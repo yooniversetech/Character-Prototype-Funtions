@@ -71,7 +71,10 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot
         DropProcessManager.Instance.ProcessDrop(this, draggedItem);
         draggedItem.ArrangeUI();
     }
-    
+
+    /// <summary>
+    /// 드래그가 끝나고 아이템이 셀에서 제거될 때 호출되는 메서드입니다.
+    /// </summary>
     public void ClearCell()
     {
         this.currentItemData = null;
@@ -79,6 +82,11 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot
         UpdateUI();
     }
 
+    /// <summary>
+    /// 현재 드래그된 아이템의 데이터를 가지고있게 하는 메서드입니다. UpdateUI() 메서드 호출로 UI도 함께 업데이트됩니다.
+    /// </summary>
+    /// <param name="data"></param>
+    /// <param name="stack"></param>
     public void AssignData(IItemData data, int stack)
     {
         this.currentItemData = data;
@@ -86,6 +94,9 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot
         UpdateUI();
     }
 
+    /// <summary>
+    /// 아이콘만 바뀐 데이터 상태를 토대로 업데이트하는 메서드입니다.
+    /// </summary>
     public void UpdateUI()
     {
         if (currentItemData != null)

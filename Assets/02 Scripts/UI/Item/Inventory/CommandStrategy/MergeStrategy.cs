@@ -11,14 +11,10 @@ public class MergeStrategy : IDropRule
     public bool IsMatch(ItemCell targetCell, InventoryItemDraggable draggableItem)
     {
 
-        if (targetCell == null) { Debug.Log("1"); return false; }
-        if (targetCell.currentItemData == null) { Debug.Log("2"); return false; }
-        if (targetCell.currentItemData.ItemID != draggableItem.itemData.ItemID)
-        {
-            Debug.Log($"타겟 ID: {targetCell.ItemData.ItemID}, 드래그 ID: {draggableItem.itemData.ItemID}");
-            return false;
-        }
+        if (targetCell == null) return false;
+        if (targetCell.currentItemData == null) return false;
         if (targetCell.CurrentStack >= targetCell.currentItemData.MaxStack) return false;
+        if (targetCell.currentItemData.ItemID != draggableItem.itemData.ItemID) return false;
 
         return true;
     }

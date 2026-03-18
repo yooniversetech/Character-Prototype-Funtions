@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot
+public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDragHandler
 {
     // --- [1. Inspector / UI References] ---
     [SerializeField] private Image itemIcon;
@@ -109,5 +109,10 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot
             itemIcon.sprite = null;
             itemIcon.gameObject.SetActive(false);
         }
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        
     }
 }

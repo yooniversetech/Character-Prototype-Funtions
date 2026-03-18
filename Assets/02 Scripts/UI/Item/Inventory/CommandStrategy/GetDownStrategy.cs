@@ -9,7 +9,7 @@ public class GetDownStrategy : IDropRule
     }
     public void Execute(ItemCell targetCell, InventoryItemDraggable draggableItem)
     {
-        targetCell.AssignData(draggableItem., draggableItem.CurrentStack);
+        targetCell.AssignData(draggableItem.OriginalItemData, draggableItem.CurrentStack);
 
         draggableItem.ClearDraggable();
 

@@ -1,17 +1,20 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class InventoryItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     [Header("UI Components")]
     private CanvasGroup canvasGroup;
     private Canvas canvas;
 
+    private Image itemIcon;
     public static ItemCell _SourceCell;
     public Transform originalParent;
-    public IItemData itemData { get; private set; }
-    public ItemData existingItem { get; private set; }
     private int currentStack = 1;
+
+    private IItemData OriginalItemData;
+
     public int CurrentStack
     {
         get => currentStack;
@@ -23,18 +26,10 @@ public class InventoryItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHan
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponentInChildren<CanvasGroup>();
     }
-    public void OnBeginDrag(PointerEventData eventData)
+
+    private void Start()
     {
-        //Debug.Log("드래그 시작");
-        _SourceCell = this.GetComponent<ItemCell>();
-
-        canvasGroup.blocksRaycasts = false;
-
-        originalParent = transform.parent;
-        transform.SetParent(canvas.transform);
-        transform.SetAsLastSibling();
-
-        canvasGroup.alpha = 0.6f;
+        itemIcon = GetComponent<Image>();  
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -54,6 +49,7 @@ public class InventoryItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHan
             transform.SetParent(originalParent);
             transform.localPosition = Vector3.zero;
         }
+        ClearDraggable();
     }
 
     public void ArrangeUI()
@@ -70,16 +66,30 @@ public class InventoryItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHan
         if (canvasGroup != null) GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 
+
+    public void Initialize(IItemData data, int stack)
+    {
+        this.OriginalItemData = data;
+        this.CurrentStack = stack;
+
+        Debug.Log($"{OriginalItemData.ItemID} 아이템 드래그 스크립트가 초기화되었습니다.");
+    }
+
+    public void ClearDraggable()
+    {
+        this.OriginalItemData = null;
+        this.CurrentStack = 0;
+    }
     private void FinishDragging()
     {
         Destroy(gameObject);
     }
 
-    public void Initialize(IItemData data, int stack)
+    public void Setup(IItemData data, int stack)
     {
-        this.itemData = data;
+        this.OriginalItemData = data;
         this.CurrentStack = stack;
 
-        Debug.Log($"{itemData.ItemID} 아이템 드래그 스크립트가 초기화되었습니다.");
+        this.itemIcon.sprite = data.ItemIcon;
     }
 }

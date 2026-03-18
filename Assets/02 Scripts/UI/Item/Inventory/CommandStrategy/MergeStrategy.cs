@@ -14,7 +14,7 @@ public class MergeStrategy : IDropRule
         if (targetCell == null) return false;
         if (targetCell.currentItemData == null) return false;
         if (targetCell.CurrentStack >= targetCell.currentItemData.MaxStack) return false;
-        if (targetCell.currentItemData.ItemID != draggableItem.itemData.ItemID) return false;
+        if (targetCell.currentItemData.ItemID != draggableItem.OriginalItemData.ItemID) return false;
 
         return true;
     }
@@ -37,7 +37,7 @@ public class MergeStrategy : IDropRule
     private void AddItem(ItemCell targetCell, InventoryItemDraggable draggableItem)
     {
         int total = targetCell.CurrentStack + draggableItem.CurrentStack;
-        int max = draggableItem.itemData.MaxStack;
+        int max = draggableItem.OriginalItemData.MaxStack;
 
         if (total <= max)
         {

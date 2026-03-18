@@ -5,7 +5,7 @@ public class SwapStrategy : MonoBehaviour, IDropRule
     public bool IsMatch(ItemCell targetCell, InventoryItemDraggable draggableItem)
     {
         if (targetCell == null) return false;
-        if (targetCell.currentItemData.ItemID == draggableItem.itemData.ItemID) return false;
+        if (targetCell.currentItemData.ItemID == draggableItem.OriginalItemData.ItemID) return false;
 
         return true;
     }

@@ -6,7 +6,6 @@ public class DropProcessManager : MonoBehaviour
 {
     public List<IDropRule> _dropRules = new List<IDropRule>();
     public static DropProcessManager Instance { get; private set; }
-
     private void Awake()
     {
         if (Instance == null) Instance = this;

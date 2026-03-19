@@ -8,6 +8,7 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDra
 {
     // --- [1. Inspector / UI References] ---
     [SerializeField] private Image itemIcon;
+    private Canvas canvas;
 
     // --- [2. Internal States / Data] ---
     [SerializeField] private int currentStack = 1;
@@ -21,6 +22,8 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDra
 
     private void Start()
     {
+        canvas = GetComponent<Canvas>();
+
         UpdateUI();
     }
     public bool CanAccept(IDraggable draggable)
@@ -113,6 +116,13 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDra
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        
+        if (currentItemData == null) return;
+
+        var draggable = DropProcessManager.Instance.DraggableItem;
+
+        draggable.Setup(currentItemData, CurrentStack, canvas.transform);
+        draggable.gameObject.SetActive(true);
+
+        itemIcon.gameObject.SetActive(false);
     }
 }

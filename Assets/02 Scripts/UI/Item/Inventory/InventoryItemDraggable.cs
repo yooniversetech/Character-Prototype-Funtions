@@ -11,10 +11,10 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
     private Image itemIcon;
     public static ItemCell _SourceCell;
     public Transform originalParent;
-    private int currentStack = 1;
+    public IItemData OriginalItemData;
 
-    private IItemData OriginalItemData;
 
+    private int currentStack = 0;
     public int CurrentStack
     {
         get => currentStack;
@@ -84,12 +84,13 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
     {
         Destroy(gameObject);
     }
-
-    public void Setup(IItemData data, int stack)
+    public void Setup(IItemData data, int stack, Transform canvasTransform)
     {
         this.OriginalItemData = data;
         this.CurrentStack = stack;
-
         this.itemIcon.sprite = data.ItemIcon;
+    
+        transform.SetParent(canvasTransform);
+        transform.SetAsLastSibling();
     }
 }

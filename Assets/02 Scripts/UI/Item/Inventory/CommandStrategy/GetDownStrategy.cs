@@ -3,19 +3,21 @@ using UnityEngine;
 
 public class GetDownStrategy : IDropRule
 {
-    public bool IsMatch(ItemCell targetCell, InventoryItemDraggable draggableItem)
+    public bool IsMatch(ItemSlot targetCell, InventoryItemDraggable draggableItem)
     {
-        return targetCell != null && targetCell.currentItemData == null;
+        if (targetCell.currentItemData != null) return false;
+        //return targetCell != null && targetCell.currentItemData == null;
+
+        return true;
     }
-    public void Execute(ItemCell targetCell, InventoryItemDraggable draggableItem)
+    public void Execute(ItemSlot targetCell, InventoryItemDraggable draggableItem)
     {
         targetCell.AssignData(draggableItem.OriginalItemData, draggableItem.CurrentStack);
 
-        draggableItem.ClearDraggable();
-
+        //draggableItem.ClearDraggable(); 
     }
 
-    private void GetDownItem(ItemCell source, ItemCell target)
+    private void GetDownItem(ItemSlot source, ItemSlot target)
     {
         target.AssignData(source.currentItemData, source.CurrentStack);
         source.ClearCell();

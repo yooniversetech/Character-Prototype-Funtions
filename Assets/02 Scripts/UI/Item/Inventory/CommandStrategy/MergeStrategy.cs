@@ -8,7 +8,7 @@ public class MergeStrategy : IDropRule
     /// <param name="targetCell"></param>
     /// <param name="draggableItem"></param>
     /// <returns></returns>
-    public bool IsMatch(ItemCell targetCell, InventoryItemDraggable draggableItem)
+    public bool IsMatch(ItemSlot targetCell, InventoryItemDraggable draggableItem)
     {
 
         if (targetCell == null) return false;
@@ -24,7 +24,7 @@ public class MergeStrategy : IDropRule
     /// </summary>
     /// <param name="targetCell"></param>
     /// <param name="draggableItem"></param>
-    public void Execute(ItemCell targetCell, InventoryItemDraggable draggableItem)
+    public void Execute(ItemSlot targetCell, InventoryItemDraggable draggableItem)
     {
         if (!IsMatch(targetCell, draggableItem)) return;
 
@@ -34,7 +34,7 @@ public class MergeStrategy : IDropRule
         }
     }
 
-    private void AddItem(ItemCell targetCell, InventoryItemDraggable draggableItem)
+    private void AddItem(ItemSlot targetCell, InventoryItemDraggable draggableItem)
     {
         int total = targetCell.CurrentStack + draggableItem.CurrentStack;
         int max = draggableItem.OriginalItemData.MaxStack;

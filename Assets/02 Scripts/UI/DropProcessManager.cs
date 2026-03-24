@@ -6,20 +6,21 @@ using UnityEngine.UI;
 public class DropProcessManager : MonoBehaviour
 {
     public List<IDropRule> _dropRules = new List<IDropRule>();
+    [SerializeField] private Transform mainCanvasTransform;
+
     public static DropProcessManager Instance { get; private set; }
     public InventoryItemDraggable DraggableItem {  get; private set; }
-
-
+    public Transform MainCanvasTransform => mainCanvasTransform;
     private void Awake()
     {
         if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        //else Destroy(gameObject);
 
         _dropRules.Add(new MergeStrategy());
         _dropRules.Add(new GetDownStrategy());
     }
 
-    public void ProcessDrop(ItemCell targetCell, InventoryItemDraggable draggedItem)
+    public void ProcessDrop(ItemSlot targetCell, InventoryItemDraggable draggedItem)
     {
         foreach (var rule in _dropRules)
         {

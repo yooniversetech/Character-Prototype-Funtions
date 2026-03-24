@@ -4,21 +4,24 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDragHandler
+public class ItemSlot : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDragHandler
 {
     // --- [1. Inspector / UI References] ---
     [SerializeField] private Image itemIcon;
     private Canvas canvas;
 
     // --- [2. Internal States / Data] ---
-    [SerializeField] private int currentStack = 1;
+    [SerializeField] private int currentStack = 0;
     public IItemData currentItemData;
+    public Transform originalParent;
+
 
     // --- [3. Interface Implementations (IItemSlot)] ---
     public IItemData ItemData => currentItemData;
     public int CurrentStack { get => currentStack; set => currentStack = value; }
     public bool IsEmpty => ContainedItem == null;
     public IDraggable ContainedItem { get; private set; }
+
 
     private void Start()
     {
@@ -46,8 +49,6 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDra
 
         if (data != null && stack > 0)
         {
-            Debug.Log(currentItemData.ItemName);
-
             if (itemIcon != null)
             {
                 itemIcon.sprite = data.ItemIcon;
@@ -66,6 +67,19 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDra
         }
     }
 
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        if (currentItemData == null) return;
+        originalParent = transform.parent;
+      
+        var draggable = DropProcessManager.Instance.DraggableItem;
+
+        draggable.Setup(currentItemData, CurrentStack, DropProcessManager.Instance.MainCanvasTransform);
+
+        draggable.gameObject.SetActive(true);
+        itemIcon.gameObject.SetActive(false);
+    }
+
     public void OnDrop(PointerEventData eventData)
     {
         var draggedItem = eventData.pointerDrag?.GetComponent<InventoryItemDraggable>();
@@ -74,7 +88,7 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDra
         DropProcessManager.Instance.ProcessDrop(this, draggedItem);
         draggedItem.ArrangeUI();
     }
-
+      
     /// <summary>
     /// 드래그가 끝나고 아이템이 셀에서 제거될 때 호출되는 메서드입니다.
     /// </summary>
@@ -112,17 +126,5 @@ public class ItemCell : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDra
             itemIcon.sprite = null;
             itemIcon.gameObject.SetActive(false);
         }
-    }
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        if (currentItemData == null) return;
-
-        var draggable = DropProcessManager.Instance.DraggableItem;
-
-        draggable.Setup(currentItemData, CurrentStack, canvas.transform);
-        draggable.gameObject.SetActive(true);
-
-        itemIcon.gameObject.SetActive(false);
     }
 }

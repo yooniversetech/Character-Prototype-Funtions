@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class SwapStrategy : MonoBehaviour, IDropRule
 {
-    public bool IsMatch(ItemCell targetCell, InventoryItemDraggable draggableItem)
+    public bool IsMatch(ItemSlot targetCell, InventoryItemDraggable draggableItem)
     {
         if (targetCell == null) return false;
         if (targetCell.currentItemData.ItemID == draggableItem.OriginalItemData.ItemID) return false;
 
         return true;
     }
-    public void Execute(ItemCell targetCell, InventoryItemDraggable draggableItem)
+    public void Execute(ItemSlot targetCell, InventoryItemDraggable draggableItem)
     {
         if (!IsMatch(targetCell, draggableItem)) return;
 

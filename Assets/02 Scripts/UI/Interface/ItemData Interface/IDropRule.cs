@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface IDropRule
 {
-    bool IsMatch(ItemCell targetCell, InventoryItemDraggable draggableItem);
+    bool IsMatch(ItemSlot targetCell, InventoryItemDraggable draggableItem);
 
-    void Execute(ItemCell targetCell, InventoryItemDraggable draggableItem);
+    void Execute(ItemSlot targetCell, InventoryItemDraggable draggableItem);
 }

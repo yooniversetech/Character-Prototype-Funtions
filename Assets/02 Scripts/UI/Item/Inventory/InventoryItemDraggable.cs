@@ -9,7 +9,7 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
     private Canvas canvas;
 
     private Image itemIcon;
-    public static ItemCell _SourceCell;
+    public static ItemSlot _SourceCell;
     public Transform originalParent;
     public IItemData OriginalItemData;
 
@@ -39,14 +39,12 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        //Debug.Log("드래그 종료");
-
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
 
         if (transform.parent != originalParent)
         {
-            transform.SetParent(originalParent);
+            gameObject.SetActive(false);
             transform.localPosition = Vector3.zero;
         }
         ClearDraggable();
@@ -54,6 +52,9 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
 
     public void ArrangeUI()
     {
+        var canvasGroup = GetComponent<CanvasGroup>();
+        if (canvasGroup != null) GetComponent<CanvasGroup>().blocksRaycasts = true;
+
         if (CurrentStack <= 0)
         {
             FinishDragging();
@@ -61,9 +62,6 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
         }
 
         transform.localPosition = Vector3.zero;
-
-        var canvasGroup = GetComponent<CanvasGroup>();
-        if (canvasGroup != null) GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 
 
@@ -71,8 +69,6 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
     {
         this.OriginalItemData = data;
         this.CurrentStack = stack;
-
-        Debug.Log($"{OriginalItemData.ItemID} 아이템 드래그 스크립트가 초기화되었습니다.");
     }
 
     public void ClearDraggable()
@@ -82,15 +78,25 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
     }
     private void FinishDragging()
     {
-        Destroy(gameObject);
+        if (CurrentStack <= 0)
+        {
+            //gameObject.SetActive(false);
+            transform.SetParent(DropProcessManager.Instance.transform);
+        }
     }
     public void Setup(IItemData data, int stack, Transform canvasTransform)
     {
         this.OriginalItemData = data;
         this.CurrentStack = stack;
         this.itemIcon.sprite = data.ItemIcon;
-    
-        transform.SetParent(canvasTransform);
+        
+        this.gameObject.SetActive(true);
+
+        transform.SetParent(canvasTransform, false);
         transform.SetAsLastSibling();
+
+        transform.localPosition = Vector3.zero;
+
+        Debug.Log($"[검거작전] 내 부모는 이제 {transform.parent.name} 입니다.");
     }
 }

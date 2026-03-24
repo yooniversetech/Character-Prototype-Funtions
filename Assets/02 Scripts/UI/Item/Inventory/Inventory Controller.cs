@@ -10,7 +10,7 @@ public class InventoryController : BaseUI
     [SerializeField] private ItemData itemData2;
 
     [Header("슬롯 설정")]
-    [SerializeField] private ItemCell[] cells;
+    [SerializeField] private ItemSlot[] cells;
 
     private void Awake()
     {
@@ -44,7 +44,7 @@ public class InventoryController : BaseUI
     {
         if (cells == null || cells.Length == 0)
         {
-            cells = GetComponentsInChildren<ItemCell>();
+            cells = GetComponentsInChildren<ItemSlot>();
         }
     }
 
@@ -80,7 +80,7 @@ public class InventoryController : BaseUI
         return true;
     }
 
-    private ItemCell FindEmptySlot()
+    private ItemSlot FindEmptySlot()
     {
         foreach (var cell in cells)
         {

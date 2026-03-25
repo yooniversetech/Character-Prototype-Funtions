@@ -27,13 +27,11 @@ public class InventoryController : BaseUI
         if (itemData != null && itemData2 != null && cells.Length > 0)
         {
             InventoryItem testItem = new InventoryItem(itemData, 1);
-            cells[0].SetItem(testItem, 1);
-
-            InventoryItem testItem2 = new InventoryItem(itemData, 1);
-            cells[1].SetItem(testItem, 1);
+            cells[9].SetItem(testItem, 1);
+            cells[10].SetItem(testItem, 1);
 
             InventoryItem testItem3 = new InventoryItem(itemData2, 1);
-            cells[4].SetItem(testItem3, 1);
+            cells[13].SetItem(testItem3, 1);
         }
     }
 

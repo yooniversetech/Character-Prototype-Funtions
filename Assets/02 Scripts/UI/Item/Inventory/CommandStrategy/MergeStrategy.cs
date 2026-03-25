@@ -11,10 +11,22 @@ public class MergeStrategy : IDropRule
     public bool IsMatch(ItemSlot targetCell, InventoryItemDraggable draggableItem)
     {
 
-        if (targetCell == null) return false;
-        if (targetCell.currentItemData == null) return false;
-        if (targetCell.CurrentStack >= targetCell.currentItemData.MaxStack) return false;
-        if (targetCell.currentItemData.ItemID != draggableItem.OriginalItemData.ItemID) return false;
+        if (targetCell == null || draggableItem == null)
+        {
+            return false;
+        }
+        if (targetCell.currentItemData == null || draggableItem.OriginalItemData == null)
+        {
+            return false;
+        }
+        if (targetCell.CurrentStack >= targetCell.currentItemData.MaxStack)
+        {
+            return false;
+        }
+        if (targetCell.currentItemData.ItemID != draggableItem.OriginalItemData.ItemID)
+        {
+            return false;
+        }
 
         return true;
     }

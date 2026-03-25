@@ -29,7 +29,7 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
 
     private void Start()
     {
-        itemIcon = GetComponent<Image>();  
+        itemIcon = GetComponent<Image>();
     }
 
     public void OnDrag(PointerEventData eventData)

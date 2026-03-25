@@ -20,6 +20,6 @@ public class GetDownStrategy : IDropRule
     private void GetDownItem(ItemSlot source, ItemSlot target)
     {
         target.AssignData(source.currentItemData, source.CurrentStack);
-        source.ClearCell();
+        source.ClearCell();    
     }
 }

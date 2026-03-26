@@ -22,7 +22,6 @@ public class ItemSlot : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDra
     public bool IsEmpty => ContainedItem == null;
     public IDraggable ContainedItem { get; private set; }
 
-
     private void Start()
     {
         canvas = GetComponent<Canvas>();
@@ -69,7 +68,11 @@ public class ItemSlot : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDra
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        Debug.Log($"[OnBeginDrag] : 1");
+
         if (currentItemData == null) return;
+        Debug.Log($"[OnBeginDrag] : 2");
+
         originalParent = transform.parent;
       
         var draggable = DropProcessManager.Instance.DraggableItem;
@@ -95,7 +98,7 @@ public class ItemSlot : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDra
     public void ClearCell()
     {
         this.currentItemData = null;
-        this.CurrentStack = 0;
+        this.CurrentStack = 1;
         UpdateUI();
     }
 

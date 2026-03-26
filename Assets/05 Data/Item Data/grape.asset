@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: grape
   m_EditorClassIdentifier: Assembly-CSharp::ConsumableItemData
-  itemID: 1
+  itemID: 2
   itemIcon: {fileID: 21300000, guid: 2951143988db69b42807c65b8ab145ad, type: 3}
   itemName: "\uD3EC\uB3C4"
   description: 

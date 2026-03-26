@@ -9,10 +9,12 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
     private Canvas canvas;
 
     private Image itemIcon;
-    public static ItemSlot _SourceCell;
+    public ItemSlot _SourceSlot;
     public Transform originalParent;
     public IItemData OriginalItemData;
 
+    // 테스트용 필드 테스트 완료시 제거 예정
+    public ItemSlot itemslot;
 
     private int currentStack = 0;
     public int CurrentStack
@@ -25,6 +27,7 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
     {
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponentInChildren<CanvasGroup>();
+        itemslot = GetComponentInChildren<ItemSlot>();  
     }
 
     private void Start()
@@ -39,6 +42,8 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        Debug.Log($"[OnEndDrag] : {CurrentStack}");
+
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
 
@@ -47,7 +52,7 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
             gameObject.SetActive(false);
             transform.localPosition = Vector3.zero;
         }
-        ClearDraggable();
+        //ClearDraggable();
     }
 
     public void ArrangeUI()
@@ -73,19 +78,24 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
 
     public void ClearDraggable()
     {
-        this.OriginalItemData = null;
-        this.CurrentStack = 0;
+        Debug.Log($"[ClearDraggable] : {CurrentStack}");
+
+        this.gameObject.SetActive(false);
     }
     private void FinishDragging()
     {
         if (CurrentStack <= 0)
         {
-            //gameObject.SetActive(false);
             transform.SetParent(DropProcessManager.Instance.transform);
+            gameObject.SetActive(false);
         }
     }
     public void Setup(IItemData data, int stack, Transform canvasTransform)
     {
+        Debug.Log($"[Setup] : {CurrentStack}");
+
+        _SourceSlot = GetComponentInParent<ItemSlot>();
+
         this.OriginalItemData = data;
         this.CurrentStack = stack;
         this.itemIcon.sprite = data.ItemIcon;
@@ -96,7 +106,5 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
         transform.SetAsLastSibling();
 
         transform.localPosition = Vector3.zero;
-
-        Debug.Log($"[검거작전] 내 부모는 이제 {transform.parent.name} 입니다.");
     }
 }

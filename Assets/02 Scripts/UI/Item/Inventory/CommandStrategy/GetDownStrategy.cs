@@ -14,12 +14,11 @@ public class GetDownStrategy : IDropRule
     {
         targetCell.AssignData(draggableItem.OriginalItemData, draggableItem.CurrentStack);
 
-        //draggableItem.ClearDraggable(); 
-    }
+        if (draggableItem._SourceSlot != null)
+        {
+            draggableItem._SourceSlot.ClearCell();
+        }
 
-    private void GetDownItem(ItemSlot source, ItemSlot target)
-    {
-        target.AssignData(source.currentItemData, source.CurrentStack);
-        source.ClearCell();    
+        draggableItem.ClearDraggable(); 
     }
 }

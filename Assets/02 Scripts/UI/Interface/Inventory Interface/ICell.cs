@@ -10,5 +10,5 @@ public interface ICell
 
     // 데이터를 슬롯에 등록 / 해제
     void SetItem(IItemData data, int stack);
-    void ClearCell();
+    void ClearSlot();
 }

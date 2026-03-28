@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6bf8f8202df0546a6db33b72c2ec2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _SourceSlot: {fileID: 1020575614689674406}
   originalParent: {fileID: 5637862101250970238}
 --- !u!1 &7472177179297828708
 GameObject:

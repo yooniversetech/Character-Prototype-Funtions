@@ -16,7 +16,7 @@ public class GetDownStrategy : IDropRule
 
         if (draggableItem._SourceSlot != null)
         {
-            draggableItem._SourceSlot.ClearCell();
+            draggableItem._SourceSlot.ClearSlot();
         }
 
         draggableItem.ClearDraggable(); 

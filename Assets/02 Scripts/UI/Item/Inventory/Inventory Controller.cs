@@ -8,6 +8,7 @@ public class InventoryController : BaseUI
     [Header("테스트용 데이터")]
     [SerializeField] private ItemData itemData;
     [SerializeField] private ItemData itemData2;
+    [SerializeField] private ItemData itemData3;
 
     [Header("슬롯 설정")]
     [SerializeField] private ItemSlot[] cells;
@@ -24,13 +25,15 @@ public class InventoryController : BaseUI
 
     private void Test_AssignItem()
     {
-        if (itemData != null && itemData2 != null && cells.Length > 0)
+        if (itemData != null && itemData2 != null && itemData3 != null && cells.Length > 0)
         {
             InventoryItem testItem = new InventoryItem(itemData, 1);
             cells[9].SetItem(testItem, 1);
+
+            InventoryItem testItem2 = new InventoryItem(itemData2, 1);
             cells[10].SetItem(testItem, 1);
 
-            InventoryItem testItem3 = new InventoryItem(itemData2, 1);
+            InventoryItem testItem3 = new InventoryItem(itemData3, 1);
             cells[13].SetItem(testItem3, 1);
         }
     }

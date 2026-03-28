@@ -13,9 +13,6 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
     public Transform originalParent;
     public IItemData OriginalItemData;
 
-    // 테스트용 필드 테스트 완료시 제거 예정
-    public ItemSlot itemslot;
-
     private int currentStack = 0;
     public int CurrentStack
     {
@@ -27,7 +24,6 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
     {
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponentInChildren<CanvasGroup>();
-        itemslot = GetComponentInChildren<ItemSlot>();  
     }
 
     private void Start()

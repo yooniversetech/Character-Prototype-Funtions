@@ -43,27 +43,35 @@ public class ItemSlot : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDra
     /// <param name="stack"></param>
     public void SetItem(IItemData data, int stack)
     {
-        this.currentItemData = data;
-        this.CurrentStack = stack;
-
-        if (data != null && stack > 0)
+        if (true)
         {
-            if (itemIcon != null)
-            {
-                itemIcon.sprite = data.ItemIcon;
-                itemIcon.gameObject.SetActive(true);
-
-                if (itemIcon.TryGetComponent<InventoryItemDraggable>(out var draggingScript))
-                {
-                    draggingScript.Initialize(data, stack);
-                }
-            }
+            this.currentItemData = data;
+            this.CurrentStack = stack;
         }
-        else
+        if (data != null)
         {
-            ClearCell();
-            AssignData(data, stack);
+            itemIcon.sprite = data.ItemIcon;
+            itemIcon.gameObject.SetActive(true);
         }
+
+        //if (data != null && stack > 0)
+        //{
+        //    if (itemIcon != null)
+        //    {
+        //        itemIcon.sprite = data.ItemIcon;
+        //        itemIcon.gameObject.SetActive(true);
+
+        //        if (itemIcon.TryGetComponent<InventoryItemDraggable>(out var draggingScript))
+        //        {
+        //            draggingScript.Initialize(data, stack);
+        //        }
+        //    }
+        //}
+        //else
+        //{
+        //    ClearSlot();
+        //    AssignData(data, stack);
+        //}
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -95,15 +103,15 @@ public class ItemSlot : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDra
     /// <summary>
     /// 드래그가 끝나고 아이템이 셀에서 제거될 때 호출되는 메서드입니다.
     /// </summary>
-    public void ClearCell()
+    public void ClearSlot()
     {
         this.currentItemData = null;
-        this.CurrentStack = 1;
+        this.CurrentStack = 0;
         UpdateUI();
     }
 
     /// <summary>
-    /// 현재 드래그된 아이템의 데이터를 가지고있게 하는 메서드입니다. UpdateUI() 메서드 호출로 UI도 함께 업데이트됩니다.
+    /// 각 슬롯에 데이터 할당 기능
     /// </summary>
     /// <param name="data"></param>
     /// <param name="stack"></param>
@@ -111,7 +119,10 @@ public class ItemSlot : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDra
     {
         this.currentItemData = data;
         this.CurrentStack = stack;
+        Debug.Log($"[AssignData] : 3"); 
+
         UpdateUI();
+
     }
 
     /// <summary>

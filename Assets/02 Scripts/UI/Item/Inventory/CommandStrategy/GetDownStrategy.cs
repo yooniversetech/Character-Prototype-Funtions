@@ -12,7 +12,9 @@ public class GetDownStrategy : IDropRule
     }
     public void Execute(ItemSlot targetCell, InventoryItemDraggable draggableItem)
     {
-        targetCell.AssignData(draggableItem.OriginalItemData, draggableItem.CurrentStack);
+        var newData = new InventoryItem(draggableItem.OriginalItemData.Data, draggableItem.CurrentStack);
+        Debug.Log($"GetDownStrategy: Executing drop. Target Cell: {targetCell.name}, Draggable Item: {draggableItem.name}, Item Data: {newData.ItemName}, Stack: {newData.CurrentStack}");
+        targetCell.AssignData(newData, draggableItem.CurrentStack);
 
         if (draggableItem._SourceSlot != null)
         {

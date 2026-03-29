@@ -43,35 +43,24 @@ public class ItemSlot : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDra
     /// <param name="stack"></param>
     public void SetItem(IItemData data, int stack)
     {
-        if (true)
+        if (data != null && stack > 0)
         {
-            this.currentItemData = data;
-            this.CurrentStack = stack;
+            if (itemIcon != null)
+            {
+                itemIcon.sprite = data.ItemIcon;
+                itemIcon.gameObject.SetActive(true);
+
+                if (itemIcon.TryGetComponent<InventoryItemDraggable>(out var draggingScript))
+                {
+                    draggingScript.Initialize(data, stack);
+                }
+            }
         }
-        if (data != null)
+        else
         {
-            itemIcon.sprite = data.ItemIcon;
-            itemIcon.gameObject.SetActive(true);
+            ClearSlot();
+            AssignData(data, stack);
         }
-
-        //if (data != null && stack > 0)
-        //{
-        //    if (itemIcon != null)
-        //    {
-        //        itemIcon.sprite = data.ItemIcon;
-        //        itemIcon.gameObject.SetActive(true);
-
-        //        if (itemIcon.TryGetComponent<InventoryItemDraggable>(out var draggingScript))
-        //        {
-        //            draggingScript.Initialize(data, stack);
-        //        }
-        //    }
-        //}
-        //else
-        //{
-        //    ClearSlot();
-        //    AssignData(data, stack);
-        //}
     }
 
     public void OnBeginDrag(PointerEventData eventData)

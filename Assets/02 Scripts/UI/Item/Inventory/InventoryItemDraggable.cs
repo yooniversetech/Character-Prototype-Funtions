@@ -13,7 +13,7 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
     public Transform originalParent;
     public IItemData OriginalItemData;
 
-    private int currentStack = 0;
+    private int currentStack = 1;
     public int CurrentStack
     {
         get => currentStack;

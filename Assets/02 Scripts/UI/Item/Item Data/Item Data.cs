@@ -14,6 +14,7 @@ public class ItemData : ScriptableObject, IItemData
     public int defalutStack = 1;
     public int maxStack;
 
+    public ItemData Data => this;
     public int ItemID => itemID;
     public string ItemName => itemName;
     public Sprite ItemIcon => itemIcon;

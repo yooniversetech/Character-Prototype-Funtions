@@ -6,7 +6,6 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
 {
     [Header("UI Components")]
     private CanvasGroup canvasGroup;
-    private Canvas canvas;
 
     private Image itemIcon;
     public ItemSlot _SourceSlot;
@@ -22,8 +21,7 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
 
     private void Awake()
     {
-        canvas = GetComponentInParent<Canvas>();
-        canvasGroup = GetComponentInChildren<CanvasGroup>();
+        canvasGroup = GetComponent<CanvasGroup>();
     }
 
     private void Start()
@@ -34,6 +32,7 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
     public void OnDrag(PointerEventData eventData)
     {
         transform.position = eventData.position;
+
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -86,21 +85,18 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
             gameObject.SetActive(false);
         }
     }
-    public void Setup(IItemData data, int stack, Transform canvasTransform)
+    public void Setup(IItemData data, int stack, Transform canvasTransform, ItemSlot source)
     {
-        Debug.Log($"[Setup] : {CurrentStack}");
-
-        _SourceSlot = GetComponentInParent<ItemSlot>();
-
+        this._SourceSlot = source;
         this.OriginalItemData = data;
         this.CurrentStack = stack;
         this.itemIcon.sprite = data.ItemIcon;
         
-        this.gameObject.SetActive(true);
-
         transform.SetParent(canvasTransform, false);
         transform.SetAsLastSibling();
+        this.gameObject.SetActive(true);
 
-        transform.localPosition = Vector3.zero;
+        if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();
+        this.canvasGroup.blocksRaycasts = false;
     }
 }

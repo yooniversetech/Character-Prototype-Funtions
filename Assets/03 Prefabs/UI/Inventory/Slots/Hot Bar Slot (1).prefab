@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 7526927154635474524}
+  itemIconCanvasGroup: {fileID: 7204178890900124486}
   currentStack: 0
   originalParent: {fileID: 0}
 --- !u!1 &3188488553859792304
@@ -441,6 +442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6bf8f8202df0546a6db33b72c2ec2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _SourceSlot: {fileID: 0}
   originalParent: {fileID: 5286903247585064897}
 --- !u!1 &8630947121699519787
 GameObject:

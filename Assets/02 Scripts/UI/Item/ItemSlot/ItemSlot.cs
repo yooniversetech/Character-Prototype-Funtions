@@ -8,12 +8,11 @@ public class ItemSlot : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDra
 {
     // --- [1. Inspector / UI References] ---
     [SerializeField] private Image itemIcon;
-    private Canvas canvas;
+    //[SerializeField] private CanvasGroup itemIconCanvasGroup;
 
     // --- [2. Internal States / Data] ---
     [SerializeField] private int currentStack = 0;
     public IItemData currentItemData;
-    public Transform originalParent;
 
 
     // --- [3. Interface Implementations (IItemSlot)] ---
@@ -24,8 +23,6 @@ public class ItemSlot : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDra
 
     private void Start()
     {
-        canvas = GetComponent<Canvas>();
-
         UpdateUI();
     }
     public bool CanAccept(IDraggable draggable)
@@ -45,11 +42,10 @@ public class ItemSlot : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDra
     {
         if (data != null && stack > 0)
         {
+            AssignData(data, stack);
+
             if (itemIcon != null)
             {
-                itemIcon.sprite = data.ItemIcon;
-                itemIcon.gameObject.SetActive(true);
-
                 if (itemIcon.TryGetComponent<InventoryItemDraggable>(out var draggingScript))
                 {
                     draggingScript.Initialize(data, stack);
@@ -59,24 +55,17 @@ public class ItemSlot : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDra
         else
         {
             ClearSlot();
-            AssignData(data, stack);
         }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log($"[OnBeginDrag] : 1");
-
         if (currentItemData == null) return;
-        Debug.Log($"[OnBeginDrag] : 2");
 
-        originalParent = transform.parent;
-      
         var draggable = DropProcessManager.Instance.DraggableItem;
 
-        draggable.Setup(currentItemData, CurrentStack, DropProcessManager.Instance.MainCanvasTransform);
+        draggable.Setup(currentItemData, CurrentStack, DropProcessManager.Instance.MainCanvasTransform, this);
 
-        draggable.gameObject.SetActive(true);
         itemIcon.gameObject.SetActive(false);
     }
 
@@ -87,6 +76,8 @@ public class ItemSlot : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDra
 
         DropProcessManager.Instance.ProcessDrop(this, draggedItem);
         draggedItem.ArrangeUI();
+
+        Debug.Log("Dropped on: " + eventData.pointerCurrentRaycast.gameObject.name);
     }
       
     /// <summary>
@@ -106,9 +97,10 @@ public class ItemSlot : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDra
     /// <param name="stack"></param>
     public void AssignData(IItemData data, int stack)
     {
+        if (data == null) Debug.LogError("[AssignData] 넘겨받은 data 자체가 null입니다!");
         this.currentItemData = data;
         this.CurrentStack = stack;
-        Debug.Log($"[AssignData] : 3"); 
+        if (data.Data == null) Debug.LogError("[AssignData] 넘겨받은 data 안의 Data(SO)가 null입니다!");
 
         UpdateUI();
 
@@ -121,11 +113,13 @@ public class ItemSlot : MonoBehaviour, ICell, IDropHandler, IItemSlot, IBeginDra
     {
         if (currentItemData != null)
         {
+            Debug.Log($"[UI 업데이트] 아이템 이름: {currentItemData.ItemName}, 주소: {currentItemData.GetHashCode()}");
             itemIcon.sprite = currentItemData.ItemIcon;
             itemIcon.gameObject.SetActive(true);
         }
         else
         {
+            Debug.Log("[UI 업데이트] 데이터가 null입니다.");
             itemIcon.sprite = null;
             itemIcon.gameObject.SetActive(false);
         }

@@ -51,9 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e4823578decef040813fe1ac387a623, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 5356271143098319578}
+  itemIcon: {fileID: 1183017069358665137}
   currentStack: 0
-  originalParent: {fileID: 0}
 --- !u!1 &5535022038416524726
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,8 +63,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3452046278891067577}
   - component: {fileID: 5140051242229032758}
-  - component: {fileID: 5356271143098319578}
-  - component: {fileID: 4268461358193031931}
+  - component: {fileID: 1183017069358665137}
+  - component: {fileID: 3531240872537471784}
   - component: {fileID: 1208939786704899908}
   m_Layer: 5
   m_Name: '[Image] Item Icon'
@@ -101,7 +100,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5535022038416524726}
   m_CullTransparentMesh: 1
---- !u!114 &5356271143098319578
+--- !u!114 &1183017069358665137
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,7 +130,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!225 &4268461358193031931
+--- !u!225 &3531240872537471784
 CanvasGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

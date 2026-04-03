@@ -7,14 +7,14 @@ public class DropProcessManager : MonoBehaviour
 {
     public List<IDropRule> _dropRules = new List<IDropRule>();
     [SerializeField] private Transform mainCanvasTransform;
+    [SerializeField] private InventoryItemDraggable draggableItem;
 
     public static DropProcessManager Instance { get; private set; }
-    public InventoryItemDraggable DraggableItem {  get; private set; }
+    public InventoryItemDraggable DraggableItem => draggableItem;
     public Transform MainCanvasTransform => mainCanvasTransform;
     private void Awake()
     {
         if (Instance == null) Instance = this;
-        //else Destroy(gameObject);
 
         _dropRules.Add(new MergeStrategy());
         _dropRules.Add(new GetDownStrategy());

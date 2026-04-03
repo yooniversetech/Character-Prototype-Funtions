@@ -2,12 +2,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandler
+public class InventoryItemDraggable : MonoBehaviour
 {
     [Header("UI Components")]
-    private CanvasGroup canvasGroup;
+    public CanvasGroup canvasGroup;
 
-    private Image itemIcon;
+    [SerializeField] private Image itemIcon;
     public ItemSlot _SourceSlot;
     public Transform originalParent;
     public IItemData OriginalItemData;
@@ -28,28 +28,6 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
     {
         itemIcon = GetComponent<Image>();
     }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        transform.position = eventData.position;
-
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        Debug.Log($"[OnEndDrag] : {CurrentStack}");
-
-        canvasGroup.alpha = 1f;
-        canvasGroup.blocksRaycasts = true;
-
-        if (transform.parent != originalParent)
-        {
-            gameObject.SetActive(false);
-            transform.localPosition = Vector3.zero;
-        }
-        //ClearDraggable();
-    }
-
     public void ArrangeUI()
     {
         var canvasGroup = GetComponent<CanvasGroup>();
@@ -73,8 +51,6 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
 
     public void ClearDraggable()
     {
-        Debug.Log($"[ClearDraggable] : {CurrentStack}");
-
         this.gameObject.SetActive(false);
     }
     private void FinishDragging()
@@ -90,13 +66,16 @@ public class InventoryItemDraggable : MonoBehaviour, IDragHandler, IEndDragHandl
         this._SourceSlot = source;
         this.OriginalItemData = data;
         this.CurrentStack = stack;
-        this.itemIcon.sprite = data.ItemIcon;
-        
+        this.gameObject.SetActive(true);
+
         transform.SetParent(canvasTransform, false);
         transform.SetAsLastSibling();
-        this.gameObject.SetActive(true);
 
         if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();
         this.canvasGroup.blocksRaycasts = false;
+        this.canvasGroup.alpha = 0.6f;
+
+        this.itemIcon.sprite = data.ItemIcon;
     }
 }
+

@@ -6,14 +6,12 @@ public class GetDownStrategy : IDropRule
     public bool IsMatch(ItemSlot targetCell, InventoryItemDraggable draggableItem)
     {
         if (targetCell.currentItemData != null) return false;
-        //return targetCell != null && targetCell.currentItemData == null;
 
         return true;
     }
     public void Execute(ItemSlot targetCell, InventoryItemDraggable draggableItem)
     {
         var newData = new InventoryItem(draggableItem.OriginalItemData.Data, draggableItem.CurrentStack);
-        Debug.Log($"555555555555555");
         targetCell.AssignData(newData, draggableItem.CurrentStack);
 
         if (draggableItem._SourceSlot != null)

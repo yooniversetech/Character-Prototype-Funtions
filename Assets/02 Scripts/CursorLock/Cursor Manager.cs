@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class CursorManager : MonoBehaviour
+public class CursorManager : MonoBehaviour 
 {
     public static event Action<bool> OnUIModeChanged; // UI 모드 변경 이벤트
     private static int _openUICount = 0; // 열린 UI의 개수를 추적하는 정적 변수
@@ -12,7 +12,6 @@ public class CursorManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
         UpdateCursorState();
     }
-
     public static void RegisterUIOpen()
     {
         _openUICount++;
@@ -25,7 +24,7 @@ public class CursorManager : MonoBehaviour
         UpdateCursorState();
     }
 
-    private static void UpdateCursorState()
+    public static void UpdateCursorState()
     {
         bool isUIActive = _openUICount > 0;
 

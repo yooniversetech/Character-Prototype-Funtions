@@ -14,10 +14,10 @@ public class CharacterMove: MonoBehaviour
     [SerializeField] private Transform cameraTransform;
 
     [Header("Settings")]
-    [SerializeField] private float moveSpeed = 1f;   // 움직이는 속도
-    [SerializeField] private float turnSmoothTime = 0.1f; // 캐릭터 회전 속도 
-    [SerializeField] private float gravity = -9.81f; // 중력 값 (지구 중력 기준)
-    [SerializeField] private float jumpHeight = 2f;  // 점프 높이 값
+    [SerializeField] private float moveSpeed = 1f;             // 움직이는 속도
+    [SerializeField] private float turnSmoothTime = 0.1f;      // 캐릭터 회전 속도 
+    [SerializeField] private float gravity = -9.81f;           // 중력 값 (지구 중력 기준)
+    [SerializeField] private float jumpHeight = 2f;            // 점프 높이 값
     [SerializeField] private float groundedBufferTime = 0.15f; // 점프 버퍼 시간 값
 
     private float lastGroundTime;

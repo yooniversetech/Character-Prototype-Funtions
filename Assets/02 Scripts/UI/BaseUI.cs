@@ -22,7 +22,6 @@ public abstract class BaseUI : MonoBehaviour, IUIToggle, ICloseable
         if (isOpen) return;
 
         isOpen = true;
-        gameObject.SetActive(true);
         CursorManager.RegisterUIOpen();
     }
 
@@ -32,7 +31,6 @@ public abstract class BaseUI : MonoBehaviour, IUIToggle, ICloseable
         if (!isOpen) return;
 
         isOpen = false;
-        gameObject.SetActive(false);
         CursorManager.RegisterUIClose();
     }
 }

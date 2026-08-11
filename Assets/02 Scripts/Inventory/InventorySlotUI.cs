@@ -79,10 +79,26 @@ public class InventorySlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
         dragIconInstance = new GameObject("DragIcon");
         dragIconInstance.transform.SetParent(transform.root);
+
         var img = dragIconInstance.AddComponent<Image>();
         img.sprite = boundSlot.ItemData.itemIcon;
         img.raycastTarget = false;
-        img.rectTransform.sizeDelta = new Vector2(50, 50);
+        img.rectTransform.sizeDelta = new Vector2(75, 75);
+
+        if (boundSlot.StackCount > 1)
+        {
+            GameObject textObj = new GameObject("DragCountText");
+            textObj.transform.SetParent(dragIconInstance.transform);
+
+            var dragText = textObj.AddComponent<TextMeshProUGUI>();
+            dragText.text = boundSlot.StackCount.ToString();
+            dragText.fontSize = 24;
+            dragText.raycastTarget = false;
+
+            RectTransform rt = textObj.GetComponent<RectTransform>();
+            rt.anchoredPosition = Vector2.zero;
+            rt.sizeDelta = new Vector2(75, 75);
+        }
     }
     #region
     public void OnDrag(PointerEventData eventData)

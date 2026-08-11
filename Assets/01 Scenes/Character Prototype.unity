@@ -4905,8 +4905,16 @@ PrefabInstance:
       value: Inventory Slot
       objectReference: {fileID: 0}
     - target: {fileID: 1090174941525740680, guid: a1c6152f566aa14438918b3a14f99225, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1090174941525740680, guid: a1c6152f566aa14438918b3a14f99225, type: 3}
       propertyPath: m_fontStyle
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1090174941525740680, guid: a1c6152f566aa14438918b3a14f99225, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1090174941525740680, guid: a1c6152f566aa14438918b3a14f99225, type: 3}
       propertyPath: m_enableAutoSizing

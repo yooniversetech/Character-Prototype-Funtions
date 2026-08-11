@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68753b55e2281bc41a798f410ffa44ef, type: 3}
-  m_Name: Apple Data
+  m_Name: Grape Data
   m_EditorClassIdentifier: 
-  itemID: Furit_Apple_001
-  itemName: Apple
-  itemType: 3
-  itemIcon: {fileID: 21300000, guid: 8dc40d1d8d23e89478e2374ee8579068, type: 3}
+  itemID: Food_Grape_002
+  itemName: "\uD3EC\uB3C4"
+  itemIcon: {fileID: 21300000, guid: 2951143988db69b42807c65b8ab145ad, type: 3}
   maxStackSize: 10
-  itemDescription: "\uD5C8\uAE30  +5\n\uC218\uBD84  +10"
+  itemDescription: "\uD5C8\uAE30  +3\n\uC218\uBD84  +15"

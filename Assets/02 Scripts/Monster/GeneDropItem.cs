@@ -29,12 +29,15 @@ public class GeneDropItem : MonoBehaviour
 
     private void Update()
     {
-        
+        float newY = startPos.y + Mathf.Sin(Time.time * bobSpeed) * bobHeight;
+        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        if (!other.CompareTag("Player")) return;
+
+        Collect();
     }
 
     private void Collect()

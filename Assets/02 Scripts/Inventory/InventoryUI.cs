@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InventoryUI : BaseUI
@@ -37,6 +38,7 @@ public class InventoryUI : BaseUI
     {
         isOpen = true;
         inventoryPanelRoot.SetActive(true);
+        OnEnable();
 
         BindAllSlots();
 
@@ -47,6 +49,7 @@ public class InventoryUI : BaseUI
     {
         isOpen = false;
         inventoryPanelRoot.SetActive(false);
+        OnDisable();
 
         OnIventoryClosed?.Invoke();
     }
@@ -60,4 +63,7 @@ public class InventoryUI : BaseUI
             slotUIElements[i].Bind(playerInventory.Slots[i], playerInventory, i);
         }
     }
+
+    private void OnEnable() => CursorManager.RegisterUIOpen(this);
+    private void OnDisable() => CursorManager.RegisterUIClose(this);
 }

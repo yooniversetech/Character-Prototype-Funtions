@@ -22,7 +22,7 @@ public abstract class BaseUI : MonoBehaviour, IUIToggle, ICloseable
         if (isOpen) return;
 
         isOpen = true;
-        CursorManager.RegisterUIOpen();
+        //CursorManager.RegisterUIOpen();
     }
 
     // UI 닫기 메서드
@@ -31,6 +31,6 @@ public abstract class BaseUI : MonoBehaviour, IUIToggle, ICloseable
         if (!isOpen) return;
 
         isOpen = false;
-        CursorManager.RegisterUIClose();
+        //CursorManager.RegisterUIClose();
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 public class CursorManager : MonoBehaviour 
 {
     public static event Action<bool> OnUIModeChanged; // UI 모드 변경 이벤트
-    private static readonly HashSet<object> _openUIs = new HashSet<object>();
+    private static readonly HashSet<object> _openUIs = new HashSet<object>(); // HashSet 사용으로 UI 중복 카운트 차단
 
     private IEnumerator Start()
     {

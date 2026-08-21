@@ -14,6 +14,8 @@ public class InventoryTestSetup : MonoBehaviour
 
         inventory.DebugSetSlot(0, appleData, 10);
         inventory.DebugSetSlot(1, appleData, 1);
-        inventory.DebugSetSlot(2, grapeData, 1);
+        inventory.DebugSetSlot(2, appleData, 1);
+        inventory.DebugSetSlot(3, grapeData, 1);
+        inventory.DebugSetSlot(4, grapeData, 1);
     }
 }

@@ -7,7 +7,7 @@ public class SimpleMonster : MonoBehaviour
     private int currentHealth;
 
     [Header("드랍 설정")]
-    [SerializeField] private GeneData geneToDrop;
+    [SerializeField] private GeneFragmentData geneToDrop;
     [SerializeField] private GameObject genePickupPrefab;
 
     [Header("죽음 연출 (선택)")]

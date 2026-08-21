@@ -17,8 +17,8 @@ public class Inventory
         for (int i = 0; i < slotCount; i++)
         {
             var slot = new ItemSlot();
-            slot.OnSlotChanged += () => OnInventoryChanged?.Invoke();
-            slots.Add(slot);
+            slot.OnSlotChanged += () => OnInventoryChanged?.Invoke();  // 슬롯 변경 시 인벤토리도 함께 변경 이벤트
+            slots.Add(slot); // 슬롯을 리스트에 추가
         }
     }
 
@@ -96,7 +96,7 @@ public class Inventory
 
 
 
-    //인벤토리 테스트용 메서드
+    //인벤토리 테스트용 메서드 (인게임의 아이템 오브젝트를 생성해서 사용할 때 삭제예정)
     public void DebugSetSlot(int index, ItemData data, int amount)
     {
         if (index < 0 || index >= slots.Count) return;

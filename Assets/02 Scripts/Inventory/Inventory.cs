@@ -18,7 +18,7 @@ public class Inventory
         {
             var slot = new ItemSlot();
             slot.OnSlotChanged += () => OnInventoryChanged?.Invoke();  // 슬롯 변경 시 인벤토리도 함께 변경 이벤트
-            slots.Add(slot); // 슬롯을 리스트에 추가
+            slots.Add(slot);                                           // 슬롯을 리스트에 추가
         }
     }
 

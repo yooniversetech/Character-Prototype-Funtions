@@ -12,9 +12,4 @@ public class GeneData : ScriptableObject
     [Header("수집 관련")]
     public int totalPiecesNeeded = 100;
     public bool isBossGene = false;
-
-    [Header("드랍 설정")]
-    [Range(0f, 1f)] public float dropChance = 1f;
-    public int minDropAmount = 1;
-    public int maxDropAmount = 1;
 }

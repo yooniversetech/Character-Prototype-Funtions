@@ -37,9 +37,9 @@ public class GeneDropItem : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
-        if (other.TryGetComponent<Inventory>(out var inventory))
+        if (other.TryGetComponent<PlayerController>(out var player))
         {
-            Collect(inventory);
+            Collect(player.inventory);
         }
     }
 

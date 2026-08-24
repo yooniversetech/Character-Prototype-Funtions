@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 799b2921ee9639d41a8ca6a1b4bf2f9a, type: 3}
+  m_Name: TestMonster
+  m_EditorClassIdentifier: 
+  monsterID: 1
+  monsterName: "\uD14C\uC2A4\uD2B8 \uBAAC\uC2A4\uD130 \uB354\uBBF8"
+  maxHealth: 3
+  geneToDrop: {fileID: 11400000, guid: 5051e60451ebabc4cb899a52eb5eecdc, type: 2}
+  genePickupPrefab: {fileID: 8323520164069708720, guid: 1f0b61ad70f2f4547970507883a105e0, type: 3}
+  dropChance: 1
+  minDropAmount: 1
+  maxDropAmount: 1
+  destroyDelay: 0.5

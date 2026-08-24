@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "Genelien/MonsterData")]
 public class MonsterData : ScriptableObject
 {
     [Header("기본 정보")]

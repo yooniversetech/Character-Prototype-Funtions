@@ -8,9 +8,19 @@ public class SimpleMonster : MonoBehaviour
     private int currentHealth;
     private bool isDead = false;
 
-    private void Awake()
+    private void Start()
     {
         currentHealth = monsterData.maxHealth;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Player")) return;
+
+        if (other.TryGetComponent<PlayerController>(out var player))
+        {
+            TakeDamage(1);
+        }
     }
 
     public void TakeDamage(int damage)

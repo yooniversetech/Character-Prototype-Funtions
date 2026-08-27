@@ -11,11 +11,6 @@ public class GeneDropItem : MonoBehaviour
     [SerializeField] private float bobHeight = 0.1f;
     private Vector3 startPos;
 
-    public void Setup(GeneFragmentData data, int dropAmount)
-    {
-        geneData = data;
-        amount = dropAmount;
-    }
 
     private void Start()
     {
@@ -26,11 +21,16 @@ public class GeneDropItem : MonoBehaviour
             col.isTrigger = true;
         }
     }
-
     private void Update()
     {
         float newY = startPos.y + Mathf.Sin(Time.time * bobSpeed) * bobHeight;
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+    }
+
+    public void Setup(GeneFragmentData data, int dropAmount)
+    {
+        geneData = data;
+        amount = dropAmount;
     }
 
     private void OnTriggerEnter(Collider other)

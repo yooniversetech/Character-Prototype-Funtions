@@ -48,6 +48,9 @@ public class SimpleMonster : MonoBehaviour
         Destroy(gameObject, monsterData.destroyDelay);
     }
 
+    /// <summary>
+    /// 몬스터가 사망 시 유전자 아이템 오브젝트를 드롭하는 로직
+    /// </summary>
     private void DropGene()
     {
         if (monsterData.geneToDrop == null || monsterData.genePickupPrefab == null) return;

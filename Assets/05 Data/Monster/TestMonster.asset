@@ -20,4 +20,4 @@ MonoBehaviour:
   dropChance: 1
   minDropAmount: 1
   maxDropAmount: 1
-  destroyDelay: 0.5
+  destroyDelay: 3

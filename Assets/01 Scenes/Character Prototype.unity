@@ -2746,7 +2746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2923c58aa6f92974f9d833c46d125884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterData: {fileID: 0}
+  monsterData: {fileID: 11400000, guid: 14b37aa6c82a4b441bdbca0cc8377aeb, type: 2}
 --- !u!136 &815329344
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3724,7 +3724,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1213302867}
-  - component: {fileID: 1213302866}
   m_Layer: 0
   m_Name: DropProcessManager
   m_TagString: Untagged
@@ -3732,18 +3731,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1213302866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1213302865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcb81ba04825f0e408b153537aeed40d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1213302867
 Transform:
   m_ObjectHideFlags: 0
@@ -11465,7 +11452,7 @@ SceneRoots:
   - {fileID: 784456149057860841}
   - {fileID: 2022764090}
   - {fileID: 757471092}
-  - {fileID: 1769154654}
   - {fileID: 1861936072}
   - {fileID: 1213302867}
   - {fileID: 815329347}
+  - {fileID: 1769154654}

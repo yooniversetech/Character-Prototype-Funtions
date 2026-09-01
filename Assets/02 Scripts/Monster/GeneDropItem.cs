@@ -33,16 +33,6 @@ public class GeneDropItem : MonoBehaviour
         amount = dropAmount;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.CompareTag("Player")) return;
-
-        if (other.TryGetComponent<PlayerController>(out var player))
-        {
-            Collect(player.inventory);
-        }
-    }
-
     private void Collect(Inventory inventory)
     {
         if (geneData == null) return;
@@ -59,5 +49,15 @@ public class GeneDropItem : MonoBehaviour
         // TODO : 획득 이팩트, 사운드 재생 위치
 
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Player")) return;
+
+        if (other.TryGetComponent<PlayerController>(out var player))
+        {
+            Collect(player.inventory);
+        }
     }
 }

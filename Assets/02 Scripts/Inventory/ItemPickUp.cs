@@ -17,7 +17,7 @@ public class ItemPickUp : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        //targetInventory = player.GetComponent<PlayerController>().inventory; // 플레이어 참조를 통해서 가져오는 방향으로 수정 예상
+        targetInventory = player.GetComponent<PlayerController>().inventory; // 플레이어 참조를 통해서 가져오는 방향으로 수정 예상
     }
 
     private void Update()

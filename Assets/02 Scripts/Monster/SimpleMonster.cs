@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class SimpleMonster : MonoBehaviour
+public class SimpleMonster : MonoBehaviour, IDamageable
 {
     [Header("데이터")]
     [SerializeField] private MonsterData monsterData;
-    
+
     private int currentHealth;
     private bool isDead = false;
 
@@ -13,15 +13,9 @@ public class SimpleMonster : MonoBehaviour
         currentHealth = monsterData.maxHealth;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.CompareTag("Player")) return;
-
-        if (other.TryGetComponent<PlayerController>(out var player))
-        {
-            TakeDamage(1);
-        }
-    }
+    // 기존 OnTriggerEnter(Player 태그 닿으면 TakeDamage 호출 예정이던 TODO) 는 제거.
+    // 이제 몬스터가 스스로 "누가 닿았는지"를 판정하지 않고,
+    // 공격하는 쪽(AttackHitbox)이 IDamageable을 통해 TakeDamage를 호출해줌.
 
     public void TakeDamage(int damage)
     {

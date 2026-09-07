@@ -94,8 +94,6 @@ public class Inventory
         slots[indexA].SwapWith(slots[indexB]);
     }
 
-
-
     //인벤토리 테스트용 메서드 (인게임의 아이템 오브젝트를 생성해서 사용할 때 삭제예정)
     public void DebugSetSlot(int index, ItemData data, int amount)
     {

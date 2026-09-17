@@ -7,7 +7,8 @@ using UnityEngine;
 public class CharacterMove: MonoBehaviour
 {
     #region 필드 
-    private CharacterController controller;
+    private CharacterController characterController;
+    private CharacterState characterState;
     private Vector3 velocity;
 
     [Header("Referance")]
@@ -27,13 +28,14 @@ public class CharacterMove: MonoBehaviour
     #region 유니티 콜백함수
     private void Start()
     {
-        controller = GetComponent<CharacterController>();
+        characterController = GetComponent<CharacterController>();
     }
     private void Update()
     {
+
         CalcGravityAndJump();
         Move();
-        controller.Move(velocity * Time.deltaTime);
+        characterController.Move(velocity * Time.deltaTime);
     }
     #endregion
 
@@ -57,13 +59,13 @@ public class CharacterMove: MonoBehaviour
             transform.rotation = Quaternion.Euler(0, angle, 0);
 
             Vector3 moveDir = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
-            controller.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
+            characterController.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
         }
     }
 
     private void CalcGravityAndJump()
     {
-        if (controller.isGrounded)
+        if (characterController.isGrounded)
         {
             lastGroundTime = Time.time;
             if (velocity.y < 0)

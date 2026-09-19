@@ -14,7 +14,6 @@ public class InventoryUI : BaseUI
     [SerializeField] private GameObject inventoryPanelRoot;
 
     private Inventory playerInventory;
-    private bool isOpen = false;
 
     public event Action OnIventoryOpened;
     public event Action OnIventoryClosed;

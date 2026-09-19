@@ -230,6 +230,8 @@ GameObject:
   - component: {fileID: 40153670}
   - component: {fileID: 40153669}
   - component: {fileID: 40153674}
+  - component: {fileID: 40153675}
+  - component: {fileID: 40153676}
   m_Layer: 0
   m_Name: NewCharater
   m_TagString: Player
@@ -277,7 +279,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -311,6 +313,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c348bd5e0e683514885d9d7910571e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterController: {fileID: 40153669}
+  characterState: {fileID: 40153675}
   cameraTransform: {fileID: 330585546}
   moveSpeed: 5
   turnSmoothTime: 0.1
@@ -346,6 +350,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 646457290}
+  characterController: {fileID: 40153669}
+  characterState: {fileID: 40153675}
+--- !u!114 &40153675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40153668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c37c709ee84fb514fa417f318a83916b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &40153676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40153668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ecc385d70529a84cabc8539212970d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &88757435
 GameObject:
   m_ObjectHideFlags: 0
@@ -5455,6 +5485,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c348bd5e0e683514885d9d7910571e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterController: {fileID: 0}
+  characterState: {fileID: 0}
   cameraTransform: {fileID: 330585546}
   moveSpeed: 5
   turnSmoothTime: 0.1

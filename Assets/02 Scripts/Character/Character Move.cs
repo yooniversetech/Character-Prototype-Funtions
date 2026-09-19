@@ -7,11 +7,10 @@ using UnityEngine;
 public class CharacterMove: MonoBehaviour
 {
     #region 필드 
-    private CharacterController characterController;
-    private CharacterState characterState;
-    private Vector3 velocity;
 
     [Header("Referance")]
+    [SerializeField] private CharacterController characterController;
+    [SerializeField] private CharacterState characterState;
     [SerializeField] private Transform cameraTransform;
 
     [Header("Settings")]
@@ -20,6 +19,7 @@ public class CharacterMove: MonoBehaviour
     [SerializeField] private float gravity = -9.81f;           // 중력 값 (지구 중력 기준)
     [SerializeField] private float jumpHeight = 2f;            // 점프 높이 값
     [SerializeField] private float groundedBufferTime = 0.15f; // 점프 버퍼 시간 값
+    private Vector3 velocity;
 
     private float lastGroundTime;
     private float turnSmoothVelocity;
@@ -32,6 +32,7 @@ public class CharacterMove: MonoBehaviour
     }
     private void Update()
     {
+        characterState.IsGrounded = characterController.isGrounded;
 
         CalcGravityAndJump();
         Move();
@@ -50,7 +51,12 @@ public class CharacterMove: MonoBehaviour
 
         Vector3 direction = new Vector3(h, 0, v).normalized;
 
-        if (direction.magnitude >= 0.1f)
+        if (characterState.IsAttacking)
+        {
+            direction = Vector3.zero;
+        }
+
+        if (direction.magnitude >= 0.1f && !characterState.IsAttacking)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
 
@@ -74,7 +80,7 @@ public class CharacterMove: MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Jump") && (Time.time - lastGroundTime < groundedBufferTime))
+        if (Input.GetKeyDown(KeyCode.Space) && (Time.time - lastGroundTime < groundedBufferTime) && characterState.IsGrounded && !characterState.IsAttacking)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             lastGroundTime = 0;

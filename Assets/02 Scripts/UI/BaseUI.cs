@@ -7,7 +7,7 @@ public abstract class BaseUI : MonoBehaviour, IUIToggle, ICloseable
     [SerializeField] protected AudioClip closeSound;
 
     // UI 상태 필드
-    private bool isOpen;
+    protected bool isOpen;
 
     // UI 토글 메서드
     public virtual void Toggle()

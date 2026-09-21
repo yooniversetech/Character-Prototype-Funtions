@@ -37,7 +37,6 @@ public class AnimationController : MonoBehaviour
             animator.SetTrigger(AttackHash);
             characterState.IsAttacking = true;
         }
-        characterState.IsAttacking = false;
     }
 
     private void OnAttackAnimationEnd()

@@ -51,11 +51,6 @@ public class CharacterMove: MonoBehaviour
 
         Vector3 direction = new Vector3(h, 0, v).normalized;
 
-        if (characterState.IsAttacking)
-        {
-            direction = Vector3.zero;
-        }
-
         if (direction.magnitude >= 0.1f && !characterState.IsAttacking)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;

@@ -39,8 +39,13 @@ public class AnimationController : MonoBehaviour
         }
     }
 
-    private void OnAttackAnimationEnd()
+    public void OnAttackAnimationEnd()
     {
         characterState.IsAttacking = false;
+    }
+
+    public void OnJumpAnimationEnd()
+    {
+        characterState.IsGrounded = true;
     }
 }

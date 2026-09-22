@@ -20,6 +20,7 @@ public class CharacterMove: MonoBehaviour
     [SerializeField] private float jumpHeight = 2f;            // 점프 높이 값
     [SerializeField] private float groundedBufferTime = 0.15f; // 점프 버퍼 시간 값
     private Vector3 velocity;
+    private Vector3 horizontalVelocity;
 
     private float lastGroundTime;
     private float turnSmoothVelocity;
@@ -48,20 +49,30 @@ public class CharacterMove: MonoBehaviour
     {
         var h = Input.GetAxis("Horizontal");
         var v = Input.GetAxis("Vertical");
-
         Vector3 direction = new Vector3(h, 0, v).normalized;
 
-        if (direction.magnitude >= 0.1f && !characterState.IsAttacking)
+        if (characterState.IsAttacking && characterState.IsGrounded)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-
-            targetAngle += cameraTransform.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0, angle, 0);
-
-            Vector3 moveDir = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
-            characterController.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
+            horizontalVelocity = Vector3.zero;
         }
+        else if (!characterState.IsAttacking)
+        {
+            if (direction.magnitude >= 0.1f)
+            {
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+                targetAngle += cameraTransform.eulerAngles.y;
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                transform.rotation = Quaternion.Euler(0, angle, 0);
+
+                Vector3 moveDir = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
+                horizontalVelocity = moveDir.normalized * moveSpeed;
+            }
+            else
+            {
+                horizontalVelocity = Vector3.zero;
+            }
+        }
+        characterController.Move(horizontalVelocity * Time.deltaTime);
     }
 
     private void CalcGravityAndJump()

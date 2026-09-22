@@ -2,14 +2,19 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
     [SerializeField] private CharacterController characterController;
     [SerializeField] private CharacterState characterState;
+    private Animator animator;
 
     private static readonly int SpeedHash = Animator.StringToHash("Walk");
     private static readonly int AttackHash = Animator.StringToHash("Attack");
     private static readonly int JumpHash = Animator.StringToHash("Jump");
 
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
     private void Update()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -47,5 +52,10 @@ public class AnimationController : MonoBehaviour
     public void OnJumpAnimationEnd()
     {
         characterState.IsGrounded = true;
+    }
+
+    public void SetAnimator(Animator newAnimator)
+    {
+        this.animator = newAnimator;
     }
 }

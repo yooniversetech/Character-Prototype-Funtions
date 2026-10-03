@@ -52,8 +52,6 @@ public class ItemCollector : MonoBehaviour
     {
         if (!col.TryGetComponent(out ItemPickUp item)) return;
         if (!CanCollect(item)) return;
-
-        item.Start
     }
 
     private bool CanCollect(ItemPickUp item)

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ItemCollector : MonoBehaviour
@@ -22,13 +23,24 @@ public class ItemCollector : MonoBehaviour
 
     private void Awake()
     {
-        
+        inventory = GetComponent<PlayerController>().inventory;
+        results = new Collider[maxDetect];
     }
 
     private void Update()
-    { 
-        
+    {
+        if (!ShouldCheck()) return;
+
+        int count = DetectItems();
+        for (int i = 0; i < count; i++)
+            TryStartPull(results[i]);
+
+        if (count == results.Length)
+            checkTimer = checkInterval;
     }
+
+    //---------- || 감지 메서드 || -----------
+    //           \/            \/  
 
     private bool ShouldCheck()
     {
@@ -52,15 +64,49 @@ public class ItemCollector : MonoBehaviour
     {
         if (!col.TryGetComponent(out ItemPickUp item)) return;
         if (!CanCollect(item)) return;
+
+        item.StartPull(transform, OnItemArrived);
     }
 
     private bool CanCollect(ItemPickUp item)
     {
+        if (item.IsBeingPulled) return false;
+        if (Time.time < blockedUntil) return false;
+
+
+        // 인벤토리에서 HasSpaceFor 과 같은 함수가 생긴다면 여기에 추가 예정
+
         return true;
     }
 
-    private void StartPull()
-    {
+    // 습득 확정 (기존 ItemPickUp 에서 살린 로직)
 
+    private void OnItemArrived(ItemPickUp item)
+    {
+        int leftover = inventory.AddItem(item.itemData, item.amount);
+
+        if (leftover == 0)
+        {
+            Destroy(item.gameObject);
+        }
+        else
+        {
+            item.amount = leftover;
+            item.CancelPull();
+            blockedUntil = Time.time + fullRetryDelay;
+        }
+    }
+
+    // 외부에서 반경을 바꿀 때를 위한 대비
+
+    public void SetRadiusBonus(float bonus)
+    {
+        radiusBonus = bonus;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, PickupRadius);
     }
 }

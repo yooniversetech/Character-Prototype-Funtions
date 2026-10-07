@@ -18,7 +18,16 @@ public class ItemPickUp : MonoBehaviour
 
     private void Update()
     {
-        
+        if (target == null) return;
+
+        transform.position = Vector3.MoveTowards(
+            transform.position, target.position, moveSpeed * Time.deltaTime);
+
+        if ((transform.position - target.position).sqrMagnitude
+            <= arriveDistance * arriveDistance)
+        {
+            onArrived?.Invoke(this);
+        }
     }
 
     public void StartPull(Transform target, Action<ItemPickUp> onArrived)
@@ -32,6 +41,4 @@ public class ItemPickUp : MonoBehaviour
         target = null;
         onArrived = null;
     }
-
-    
 }

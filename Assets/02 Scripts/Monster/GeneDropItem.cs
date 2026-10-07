@@ -42,7 +42,8 @@ public class GeneDropItem : MonoBehaviour
         // 예시 : GeneInventoryManager.Instance.AddGenePiece(geneData.geneID, amount);
         if (leftover > 0)
         {
-            Debug.Log($"인벤토리가 가득 차서 {leftover}개의 유전자를 획득하지 못했습니다.");
+            amount = leftover;
+            //Debug.Log($"인벤토리가 가득 차서 {leftover}개의 유전자를 획득하지 못했습니다.");
             return;
         }
 
@@ -51,13 +52,16 @@ public class GeneDropItem : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.CompareTag("Player")) return;
 
-        if (other.TryGetComponent<PlayerController>(out var player))
-        {
-            Collect(player.inventory);
-        }
-    }
+    // 현재 획득 반경으로 아이템 획득 기능이 정상동작하면 삭제 예정
+    // TODO : 변경할 기능이 정상동작시 즉시 삭제예정
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (!other.CompareTag("Player")) return;
+
+    //    if (other.TryGetComponent<PlayerController>(out var player))
+    //    {
+    //        Collect(player.inventory);
+    //    }
+    //}
 }

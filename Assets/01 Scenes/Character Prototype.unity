@@ -368,7 +368,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 40153668}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4caa1c15d3273b24a9bc3fd9e9f636ae, type: 3}
   m_Name: 
@@ -377,7 +377,7 @@ MonoBehaviour:
   checkInterval: 0.1
   itemlayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   maxDetect: 256
   fullRetryDelay: 1
 --- !u!1 &88757435
@@ -6155,9 +6155,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3881231339908344346, guid: 1f0b61ad70f2f4547970507883a105e0, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8323520164069708720, guid: 1f0b61ad70f2f4547970507883a105e0, type: 3}
       propertyPath: m_Name
       value: TestGene
+      objectReference: {fileID: 0}
+    - target: {fileID: 8323520164069708720, guid: 1f0b61ad70f2f4547970507883a105e0, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

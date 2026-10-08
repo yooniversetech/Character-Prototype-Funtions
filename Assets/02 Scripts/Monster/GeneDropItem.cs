@@ -1,10 +1,10 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class GeneDropItem : MonoBehaviour
+public class GeneDropItem : DroppedItem
 {
     [SerializeField] private GeneFragmentData geneData;
-    [SerializeField] private int amount = 1;
+    //[SerializeField] private int amount = 1;
 
     [Header("연출 (선택)")]
     [SerializeField] private float bobSpeed = 2f;
@@ -21,19 +21,13 @@ public class GeneDropItem : MonoBehaviour
             col.isTrigger = true;
         }
     }
-    private void Update()
+    protected override void Update()
     {
         float newY = startPos.y + Mathf.Sin(Time.time * bobSpeed) * bobHeight;
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
     }
 
-    public void Setup(GeneFragmentData data, int dropAmount)
-    {
-        geneData = data;
-        amount = dropAmount;
-    }
-
-    private void Collect(Inventory inventory)
+    protected override void Collect(Inventory inventory)
     {
         if (geneData == null) return;
 
@@ -49,6 +43,12 @@ public class GeneDropItem : MonoBehaviour
         // TODO : 획득 이팩트, 사운드 재생 위치
 
         Destroy(gameObject);
+    }
+
+    public void Setup(GeneFragmentData data, int dropAmount)
+    {
+        geneData = data;
+        amount = dropAmount;
     }
 
     private void OnTriggerEnter(Collider other)

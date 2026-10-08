@@ -50,11 +50,11 @@ public class ItemCollector : MonoBehaviour
 
     private void TryStartPull(Collider col)
     {
-        if (!col.TryGetComponent(out ItemPickUp item)) return;
+        if (!col.TryGetComponent(out DroppedItem item)) return;
         if (!CanCollect(item)) return;
     }
 
-    private bool CanCollect(ItemPickUp item)
+    private bool CanCollect(DroppedItem item)
     {
         return true;
     }

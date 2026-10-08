@@ -17,7 +17,16 @@ public abstract class DroppedItem : MonoBehaviour
 
     protected virtual void Update()
     {
-        
+        if (target == null) return;
+
+        transform.position = Vector3.MoveTowards(
+            transform.position, target.position, moveSpeed * Time.deltaTime);
+
+        if ((transform.position - target.position).sqrMagnitude
+            <= arriveDistance * arriveDistance)
+        {
+            onArrived?.Invoke(this);
+        }
     }
     protected abstract void Collect(Inventory inventory);
 

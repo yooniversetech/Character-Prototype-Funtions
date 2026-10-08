@@ -56,4 +56,5 @@ public class GeneDropItem : DroppedItem
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
+    }
 }

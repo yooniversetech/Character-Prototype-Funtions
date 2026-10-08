@@ -23,27 +23,29 @@ public class GeneDropItem : DroppedItem
     }
     protected override void Update()
     {
+        if (IsBeingPulled)
+        {
+            base.Update();
+            return;
+        }
+
         float newY = startPos.y + Mathf.Sin(Time.time * bobSpeed) * bobHeight;
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
     }
 
-    protected override void Collect(Inventory inventory)
+    public override int Collect(Inventory inventory)
     {
-        if (geneData == null) return;
+        if (geneData == null) return amount;
 
         int leftover = inventory.AddItem(geneData, amount);
-        // TODO : 여기서 실제 인벤토리/유전자 도감 시스템과 연결 필요
-        // 예시 : GeneInventoryManager.Instance.AddGenePiece(geneData.geneID, amount);
         if (leftover > 0)
         {
             amount = leftover;
-            //Debug.Log($"인벤토리가 가득 차서 {leftover}개의 유전자를 획득하지 못했습니다.");
-            return;
+            return leftover;
         }
 
-        // TODO : 획득 이팩트, 사운드 재생 위치
-
         Destroy(gameObject);
+        return 0;
     }
 
 
@@ -57,4 +59,24 @@ public class GeneDropItem : DroppedItem
     {
         if (!other.CompareTag("Player")) return;
     }
+
+
+    //public override int Collect(Inventory inventory)
+    //{
+    //    if (geneData == null) return;
+
+    //    int leftover = inventory.AddItem(geneData, amount);
+    //    // TODO : 여기서 실제 인벤토리/유전자 도감 시스템과 연결 필요
+    //    // 예시 : GeneInventoryManager.Instance.AddGenePiece(geneData.geneID, amount);
+    //    if (leftover > 0)
+    //    {
+    //        amount = leftover;
+    //        //Debug.Log($"인벤토리가 가득 차서 {leftover}개의 유전자를 획득하지 못했습니다.");
+    //        return;
+    //    }
+
+    //    // TODO : 획득 이팩트, 사운드 재생 위치
+
+    //    Destroy(gameObject);
+    //}
 }

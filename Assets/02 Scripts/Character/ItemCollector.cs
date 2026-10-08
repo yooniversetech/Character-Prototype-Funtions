@@ -32,6 +32,7 @@ public class ItemCollector : MonoBehaviour
         if (!ShouldCheck()) return;
 
         int count = DetectItems();
+        Debug.Log($"감지된 개수: {count}");
         for (int i = 0; i < count; i++)
             TryStartPull(results[i]);
 
@@ -81,17 +82,12 @@ public class ItemCollector : MonoBehaviour
 
     // 습득 확정 (기존 ItemPickUp 에서 살린 로직)
 
-    private void OnItemArrived(ItemPickUp item)
+    private void OnItemArrived(DroppedItem item)
     {
-        int leftover = inventory.AddItem(item.itemData, item.amount);
+        int leftover = item.Collect(inventory);
 
-        if (leftover == 0)
+        if (leftover > 0)
         {
-            Destroy(item.gameObject);
-        }
-        else
-        {
-            item.amount = leftover;
             item.CancelPull();
             blockedUntil = Time.time + fullRetryDelay;
         }

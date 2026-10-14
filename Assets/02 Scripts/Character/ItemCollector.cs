@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemCollector : MonoBehaviour
@@ -21,6 +21,10 @@ public class ItemCollector : MonoBehaviour
     private float radiusBonus;
     public float PickupRadius => pickupRadius + radiusBonus;
 
+    private readonly HashSet<DroppedItem> pulling = new();
+    private readonly List<DroppedItem> releaseBuffer = new();
+
+
     private void Awake()
     {
         inventory = GetComponent<PlayerController>().inventory;
@@ -31,6 +35,8 @@ public class ItemCollector : MonoBehaviour
     {
         if (!ShouldCheck()) return;
 
+        ReleaseOutOfRange();
+
         int count = DetectItems();
         //Debug.Log($"감지된 개수: {count}");
         for (int i = 0; i < count; i++)
@@ -38,6 +44,31 @@ public class ItemCollector : MonoBehaviour
 
         if (count == results.Length)
             checkTimer = checkInterval;
+    }
+
+    private void ReleaseOutOfRange()
+    {
+        float r = PickupRadius;
+        float rSqr = r * r;
+        releaseBuffer.Clear();
+
+        foreach (var item in pulling)
+        {
+            if (item == null)
+            {
+                releaseBuffer.Add(item);
+                continue;
+            }
+
+            if ((item.transform.position - transform.position).sqrMagnitude > rSqr)
+            {
+                item.CancelPull();
+                releaseBuffer.Add(item);
+            }
+        }
+
+        foreach (var item in releaseBuffer)
+            pulling.Remove(item);
     }
 
     //---------- || 감지 메서드 || -----------
@@ -67,6 +98,7 @@ public class ItemCollector : MonoBehaviour
         if (!CanCollect(item)) return;
 
         item.StartPull(transform, OnItemArrived);
+        pulling.Add(item);
     }
 
     private bool CanCollect(DroppedItem item)
@@ -84,8 +116,9 @@ public class ItemCollector : MonoBehaviour
 
     private void OnItemArrived(DroppedItem item)
     {
-        int leftover = item.Collect(inventory);
+        pulling.Remove(item);
 
+        int leftover = item.Collect(inventory);
         if (leftover > 0)
         {
             item.CancelPull();
@@ -100,7 +133,7 @@ public class ItemCollector : MonoBehaviour
         radiusBonus = bonus;
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected() // 테스트용 기즈모 (추후 삭제 예정)
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, PickupRadius);

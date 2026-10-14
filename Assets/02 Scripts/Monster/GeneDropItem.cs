@@ -4,20 +4,9 @@ using UnityEngine;
 public class GeneDropItem : DroppedItem
 {
     [SerializeField] private GeneFragmentData geneData;
-    //[SerializeField] private int amount = 1;
-
-    [Header("연출 (선택)")]
-    [SerializeField] private float bobSpeed = 2f;
-    [SerializeField] private float bobHeight = 0.1f;
-    [SerializeField] private float defortRotSpeed = 55f;  // 일반 아이템 회전속도
-    //[SerializeField] private float artRotSpeed = 20f;   // 추후 보스, 아티팩트 회전 속도는 다르게 제어
-    private Vector3 startPos;
-
 
     private void Start()
     {
-        startPos = transform.position;
-
         if (TryGetComponent<Collider>(out var col))
         {
             col.isTrigger = true;
@@ -30,9 +19,6 @@ public class GeneDropItem : DroppedItem
             base.Update();
             return;
         }
-
-        ItemBoping();
-        ItemRotate();
     }
 
     public override int Collect(Inventory inventory)
@@ -61,17 +47,6 @@ public class GeneDropItem : DroppedItem
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
-    }
-
-    private void ItemBoping()
-    {
-        float newY = startPos.y + Mathf.Sin(Time.time * bobSpeed) * bobHeight;
-        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
-    }
-
-    private void ItemRotate()
-    {
-        transform.Rotate(0f, defortRotSpeed * Time.deltaTime, 0f, Space.World);
     }
 
     //public override int Collect(Inventory inventory)

@@ -32,7 +32,7 @@ public class ItemCollector : MonoBehaviour
         if (!ShouldCheck()) return;
 
         int count = DetectItems();
-        Debug.Log($"감지된 개수: {count}");
+        //Debug.Log($"감지된 개수: {count}");
         for (int i = 0; i < count; i++)
             TryStartPull(results[i]);
 

@@ -226,9 +226,9 @@ GameObject:
   m_Component:
   - component: {fileID: 40153673}
   - component: {fileID: 40153672}
-  - component: {fileID: 40153671}
   - component: {fileID: 40153670}
   - component: {fileID: 40153669}
+  - component: {fileID: 40153671}
   - component: {fileID: 40153675}
   - component: {fileID: 40153676}
   - component: {fileID: 40153677}

@@ -21,7 +21,7 @@ public class ItemCollector : MonoBehaviour
     private float radiusBonus;
     public float PickupRadius => pickupRadius + radiusBonus;
 
-    private readonly HashSet<DroppedItem> pulling = new();
+    private readonly HashSet<DroppedItem> pulling = new(); // 객체를 정수로 저장하고 끌려오거나 끌려오는 상태에서 해제된 객체를 담아서 관리하기 위한 읽기전용 필드
     private readonly List<DroppedItem> releaseBuffer = new();
 
 
@@ -97,7 +97,7 @@ public class ItemCollector : MonoBehaviour
         if (!col.TryGetComponent(out DroppedItem item)) return;
         if (!CanCollect(item)) return;
 
-        item.StartPull(transform, OnItemArrived);
+        item.StartPull(transform, OnItemArrived); // 매개변수로 캐릭터의 위치, OnItemArrived 라는 함수 핸들을 StartPull 로 넘겨주어 호출
         pulling.Add(item);
     }
 
@@ -114,15 +114,15 @@ public class ItemCollector : MonoBehaviour
 
     // 습득 확정 (기존 ItemPickUp 에서 살린 로직)
 
-    private void OnItemArrived(DroppedItem item)
+    private void OnItemArrived(DroppedItem item) // 
     {
-        pulling.Remove(item);
+        pulling.Remove(item); // pulling 에 추가된 해쉬값을 삭제
 
-        int leftover = item.Collect(inventory);
-        if (leftover > 0)
+        int leftover = item.Collect(inventory); // GeneDropItem 으로 부터 끝까지 실행되어 종료된 반환값은 0이므로 실행이 끝까지 성공한 경우 leftover = 0, Collect의 첫번째 조건문에서 함수 종료되었을 시 leftover = amount 
+        if (leftover > 0) // Collect의 함수가 끝까지 실행되지 않았을 경우 즉 leftover의 값이 0 보다 크다면 내부 코드 실행
         {
-            item.CancelPull();
-            blockedUntil = Time.time + fullRetryDelay;
+            item.CancelPull(); // 아이템 오브젝트 끌어당기는 연출 취소
+            blockedUntil = Time.time + fullRetryDelay; // 현재 1을 blockedUntil 에 대입
         }
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventorySlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+public class InventorySlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("UI 참조 (인스펙터에서 연결 필요)")]
     [SerializeField] private Image itemIconIamge;
@@ -71,6 +71,7 @@ public class InventorySlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (boundSlot == null || boundSlot.IsEmpty) return;
+        TooltipUI.Instance.Hide();
 
         draggedFromSlot = this;
 
@@ -143,6 +144,17 @@ public class InventorySlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         {
             fromSlot.SwapWith(toSlot);
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (boundSlot == null || boundSlot.IsEmpty) return;
+        TooltipUI.Instance.Show(boundSlot.ItemData);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        TooltipUI.Instance.Hide();
     }
     #endregion
 }
